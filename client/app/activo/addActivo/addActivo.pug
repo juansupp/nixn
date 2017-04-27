@@ -1,0 +1,139 @@
+div(layout='row', layout-align='center center')
+  md-content(flex='45' layout-padding='')
+    md-card-title
+      md-card-title-text
+        span.md-headline Nuevo activo
+        p.md-body-1
+          | Al momento de registrar el activo unicamente registras los datos y caracteristicas,
+          b es necesario ligar el activo a un cliente para trabajar adecuadamente con el,
+          | por defecto el activo se registrará en bodega
+          | Una vez registrado te redireccionará a una nueva ventana para poder ligarlo.
+    form(name='activoForm', ng-submit='$ctrl.nuevoActivo(activoForm)')
+      //-Tipo de activo
+      nix-select(
+        flex
+        required='true',
+        name='tipoActivo'
+        label='Tipo de activo',
+        ng-model='$ctrl.model.tipoActivo'
+        ng-change='$ctrl.selectTipoActivo()'
+        nx-data='$ctrl.nxData.tipoActivo'
+        frm='activoForm.tipoActivo'
+      )
+      br
+      //-Serial
+      nix-text(
+        label='Serial'
+        name='serial',
+        ng-model='$ctrl.model.serial',
+        required='true'
+        frm='activoForm.serial')
+      div(layout='row')
+        //- Marca
+        nix-auto(
+          flex
+          required='true',
+          name='marca',
+          label='Marca',
+          ng-model='$ctrl.model.marca',
+          nx-data='$ctrl.nxData.marca'
+          frm='activoForm.marca'
+          nx-change='$ctrl.selectMarca()'
+          nx-text='$ctrl.text.marca'
+        )
+        //- Modelo se carga por marca ng-disabled="$ctrl.disabled.modelo"
+        nix-auto(
+          flex
+
+          required='true',
+          name='modelo',
+          label='Modelo',
+          ng-model='$ctrl.model.modelo',
+          nx-data='$ctrl.nxData.modelo'
+          frm='activoForm.modelo'
+          nx-text='$ctrl.text.modelo'
+        )
+      div(layout='row')
+        //-Seguridad
+        nix-text(
+          flex
+          required='false',
+          name='seguridad'
+          ng-model='$ctrl.model.seguridad'
+          label='Seguridad'
+        )
+        //-Inventario
+        nix-text(
+          flex
+          required='false',
+          name='inventario'
+          ng-model='$ctrl.model.inventario'
+          label='Inventario'
+        )
+      div(layout='column' ng-if='$ctrl.showCar')
+        md-card-title
+          md-card-title-text
+            span.md-headline Caracteristicas
+            p.md-body-1
+              | Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              | Ipsa ducimus quas alias iusto, voluptas esse, aspernatur nobis
+              | reprehenderit! Provident, error eaque veniam maxime optio in
+              | dolorem sequi quaerat voluptate quae.
+        md-card-content(layout='row')
+          div(flex ng-repeat='caracteristica in $ctrl.caracteristicas')
+            md-select( ng-model='caracteristica.selected' placeholder='{{caracteristica._caracteristica}}')
+              md-option(value='{{valor.id_caracteristica_valor}}' ng-repeat='valor in  caracteristica.values' ) {{valor._valor}}
+      md-button.md-primary.raised(
+        type='submit',
+        ng-disabled='$ctrl.disabled.submit') Registrar
+
+
+
+//- div(layout='row')
+       //-Cliente
+          nix-select(
+            flex
+            required='true',
+            name='cliente',
+            ng-model='$ctrl.model.cliente',
+            label='Cliente',
+            nx-data='$ctrl.nxData.cliente',
+            frm='activoForm.cliente'
+            ng-change='$ctrl.selectedCliente()'
+          )
+            //- Area
+            nix-auto(
+              flex
+              required='true'
+              name='area'
+              label='Area'
+              ng-model='$ctrl.model.area'
+              nx-data='$ctrl.nxData.area'
+              frm="activoForm.area"
+            )
+            //- Contacto
+            nix-auto(
+              flex
+              required='true'
+              name='area'
+              label='Area'
+              ng-model='$ctrl.model.area'
+              nx-data='$ctrl.nxData.area'
+              frm="activoForm.area"
+            )
+            md-autocomplete(
+              ng-disabled='$ctrl.areaDisabled',
+              required='',
+              flex='',
+              md-min-length='0',
+              md-selected-item='$ctrl.model.area'
+              md-selected-item-change='$ctrl.selectedArea(item)',
+              md-input-name='area',
+              md-search-text='$ctrl.areaSearch',
+              md-items='item in $ctrl.searchArea($ctrl.areaSearch)',
+              md-item-text='item.nombre',
+              md-floating-label='Area')
+              md-item-template
+                span(md-highlight-text='$ctrl.areaSearch') {{item.nombre}}
+              div(ng-messages='activoForm.area.$error')
+                div(ng-message='required') Debes seleccionar o registrar un area.

@@ -1,0 +1,45 @@
+div(layout='row', layout-align='center center')
+  md-content(layout-padding flex='50')
+    md-card-title
+      md-card-title-text
+        span.md-headline Nuevo ticket
+        p.md-body-1
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ducimus quas alias iusto, voluptas esse, aspernatur nobis reprehenderit! Provident, error eaque veniam maxime optio in dolorem sequi quaerat voluptate quae.
+    form(name='$ctrl.ticketForm', ng-submit='$ctrl.nuevoTicket($event,ticketForm)')
+      div(layout='row' flex)
+        //-Servicio
+        nix-auto(
+          flex
+          required='true'
+          name='servicio'
+          label='Servicio'
+          ng-model='$ctrl.model.servicio'
+          nx-data='$ctrl.nxData.servicio'
+          frm="$ctrl.ticketForm.servicio")
+        //-Origen
+        nix-select(
+          flex
+          required='true'
+          name='origen'
+          label='Origen de la solicitud'
+          ng-model='$ctrl.model.origen'
+          nx-data='$ctrl.nxData.origen'
+          frm="$ctrl.ticketForm.origen")
+      //- Descripcion
+      md-input-container.md-block(flex)
+        label Descripción
+        textarea(name='descripcion' required ng-model ='$ctrl.model.descripcion')
+        div(ng-messages='ticketForm.descripcion.$error')
+          div(ng-message='required') Campo requerido.
+      //-Tecnico
+      br
+      nix-select(
+        required='true'
+        name='tecnico'
+        label='Tecnico'
+        ng-model='$ctrl.model.tecnico'
+        nx-data='$ctrl.nxData.tecnico'
+        frm="$ctrl.ticketForm.tecnico"
+      )
+      md-button.md-primary.md-raised(ngf-select='', ngf-max-size="1MB" ng-model='$ctrl.model.images' ngf-accept="'image/*'"  ngf-multiple='true') Adjuntar archivos
+      md-button.md-primary(type='submit', ng-disabled='$ctrl.btnDisabled') Registrar

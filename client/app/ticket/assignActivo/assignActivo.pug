@@ -1,0 +1,22 @@
+div(layout='row', layout-align='center center')
+  md-content(layout-padding flex='70')
+    md-card-title
+      md-card-title-text
+        span.md-headline Asignar activo a ticket
+        p.md-body-1
+          | Primero debes seleccionar un activo de la lista para despues asignarlo, haciendo click en el botón asignar de la lista de tickets pendientes por activos
+    md-content(layout='row')
+      md-content(flex)
+        activo-list( ng-model='$ctrl.activoSeleccionado')
+      md-card(flex='35')
+        md-list()
+          md-list-item.secondary-button-padding.md-3-line(ng-repeat='ticket in $ctrl.fTickets' )
+            .md-list-item-text(layout='column' )
+              h3 Ticket numero {{ticket.N_Ticket}}
+              h4(title='{{ticket.texto}}')  {{ticket.texto}}
+            md-button.md-secondary.md-primary(
+              ng-click='$ctrl.assignActivo(ticket,$event)'
+              ) Asignar activo
+
+
+

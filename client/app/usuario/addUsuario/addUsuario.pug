@@ -1,0 +1,75 @@
+div(layout='row', layout-align='center center')
+  md-content(layout-padding='' flex='45')
+    md-card-title
+      md-card-title-text
+        span.md-headline Nuevo usuario
+        p.md-body-1
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ducimus quas alias iusto, voluptas esse, aspernatur nobis reprehenderit! Provident, error eaque veniam maxime optio in dolorem sequi quaerat voluptate quae.
+    form(name='userForm', ng-submit='$ctrl.nuevoUsuario(userForm)')
+      div(layout='row')
+        //-Apellido
+        nix-text(
+          flex
+          required='true',
+          label='Apellido',
+          ng-model='$ctrl.model.apellido',
+          name='apellido',
+          frm='userForm.apellido'
+        )
+        //-Nombre
+        nix-text(
+          flex  
+          required='true',
+          label='Nombre',
+          ng-model='$ctrl.model.nombre',
+          name='nombre',
+          frm='userForm.nombre'
+        )
+      //- Telefono
+      nix-text(
+        required='false',
+        label='Telefono',
+        ng-model='$ctrl.model.telefono',
+        name='telefono',
+      )
+      //- Correo
+      nix-text(
+        type='email'
+        required='true',
+        label='Correo',
+        ng-model='$ctrl.model.correo',
+        name='correo',
+        frm='userForm.correo'
+      )
+      //-Contraseñas
+      div(layout='row')
+        nix-text(
+          flex
+          type='password'
+          required='true',
+          name='contrasena'
+          label='Contraseña',
+          ng-model='$ctrl.model.contrasena',
+          frm='userForm.contrasena'
+        )
+        nix-text(
+          flex
+          type='password'
+          required='true',
+          name='_contrasena'
+          label='Contraseña de nuevo',
+          ng-model='$ctrl.model._contrasena',
+          frm='userForm._contrasena'
+        )
+      //- Rol
+      nix-select(
+        required='true',
+        name='rol',
+        label='Rol',
+        ng-model='$ctrl.model.rol',
+        nx-data='$ctrl.nxData.rol',
+        frm='userForm.rol'
+      )
+      //-
+              div(ng-message='md-maxlength') El campo de apellido no puede superar los 30 caracteres.
+      md-button.md-primary(type='submit', ng-disabled='$ctrl.btnDisabled') Registrar

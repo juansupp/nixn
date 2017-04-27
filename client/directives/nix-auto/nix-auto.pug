@@ -1,0 +1,16 @@
+md-autocomplete(
+    ng-required='{{required}}'
+    md-selected-item='ngModel'
+    md-min-length='0'
+    md-input-name='name',
+    md-search-text='nxText'
+    ng-disabled='ngDisabled'
+    md-no-cache='true'
+    md-items ='item in searchFn(nxText)'
+    md-item-text='item.display'
+    md-selected-item-change='nxChange()',
+    md-floating-label='{{label}}')
+    md-item-template
+      span(md-highlight-text='nxText') {{item.display}}
+    div(ng-messages='frm.$error')
+      div(ng-message='required') Campo requerido
