@@ -48,9 +48,13 @@ exports = module.exports = [{
     state: 'm.addActivo',
     title: 'Agregar'
   },{
-    icon: 'add',
+    icon: 'move_to_inbox',
+    state: 'm.alistarActivo',
+    title: 'Alistar activo'
+  },{ 
+    icon: 'settings_applications',
     state: 'm.configActivo',
-    title: 'Configurar tipados'
+    title: 'Configurar tipos de activos'
   },{
     icon: 'assignment',
     state: 'm.adminInventario',

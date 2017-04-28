@@ -15,8 +15,8 @@ let featuresList = ($bi,$time) => {
         "estado",
         "fecha",
         "hora",
-        "servicio",
-        "origen",
+        "_servicio",
+        "_origen",
         "usuario_final",
         "cliente",
         "area",
@@ -38,11 +38,11 @@ let featuresList = ($bi,$time) => {
           scope.struct.forEach(item => {
             for (let tick in _ticket.data[0])
               if(item.list[tick]){
-                if (tick === 'fecha') 
+                if (tick === 'fecha')
                   item.list[tick].value = $time.date(_ticket.data[0][tick], "LL", 1);
-                else if (tick === 'hora') 
-                  item.list[tick].value =  $time.time(_ticket.data[0][tick]); 
-                else 
+                else if (tick === 'hora')
+                  item.list[tick].value =  $time.time(_ticket.data[0][tick]);
+                else
                   item.list[tick].value = _ticket.data[0][tick];
               }
           });
@@ -60,4 +60,3 @@ let featuresList = ($bi,$time) => {
 export default angular.module('nixApp.featuresList', [])
   .directive('featuresList', featuresList)
   .name;
-

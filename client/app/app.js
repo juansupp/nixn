@@ -47,7 +47,7 @@ import documTicket from './ticket/documTicket/documTicket.component';
 import adminCliente from './cliente/adminCliente/adminCliente.component';
 import adminUsuario from './usuario/adminUsuario/adminUsuario.component';
 import configActivo from './activo/configActivo/configActivo.component';
-import ligarActivo from './activo/ligarActivo/ligarActivo.component';
+
 import entrega from './activo/entrega/entrega.component';
 import pruebas from './pruebas/pruebas.component';
 import alistarActivo from './activo/alistarActivo/alistarActivo.component';
@@ -74,7 +74,7 @@ angular.module('nixApp', [
     //==> SERVICES
     login, menu, master, addUsuario, addCliente, addActivo, addTicket,
     adminTicket,documTicket,adminCliente,adminUsuario, configActivo,pruebas,
-    ligarActivo,entrega,alistarActivo,assignActivo,
+    entrega,alistarActivo,assignActivo,
     // ==> COMPONENTS
     featuresList,activoList,nixText,nixSelect,nixAuto
     // ==> DIRECTIVES

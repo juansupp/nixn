@@ -173,6 +173,12 @@ export function bifrostService($http, $hummer) {
     return methods;
   }
 
+  function software(_entity='software'){
+    entity = _entity;
+    return methods;
+  }
+
+  this.software = software;
   this.base =  base;
   this.carActivo = carActivo;
   this.carValor = carValor;

@@ -11,6 +11,7 @@ function nixText(){
         require : 'ngModel',
         scope : {
             ngModel : '=',
+            ngChange: '&',
             label : '@',
             required : '=',
             name : '=',
