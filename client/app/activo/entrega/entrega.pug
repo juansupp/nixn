@@ -1,16 +1,96 @@
 div(layout='row', layout-align='center center')
-  md-content(flex='45' layout-padding='')
+  md-content(layout-padding )
     md-card-title
       md-card-title-text
-        span.md-headline Registro de ordenes de entrega
+        span.md-headline Registrar ordenes de entrega 
         p.md-body-1
-          | Al momento de registrar el activo unicamente registras los datos y caracteristicas,
-          b es necesario ligar el activo a un cliente para trabajar adecuadamente con el,
-          | por defecto el activo se registrará en bodega
-          | Una vez registrado te redireccionará a una nueva ventana para poder ligarlo.
-    form(name='entregaForm', ng-submit='$ctrl.nuevaEntrega(activoForm)')
-
-      md-button.md-primary.raised(
-        type='submit',
-        ng-disabled='$ctrl.disabled.submit') Registrar
-
+          |  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, iure, molestias. Deleniti, totam, saepe. Harum, quis deserunt dolores reiciendis ab dolorum non rerum, accusantium, nesciunt laborum illo esse hic quaerat!
+    md-content(layout='row')
+      md-card(flex='35')
+        md-list
+          div(layout='row')
+            md-subheader(flex).md-no-sticky Lista de activos en bodega
+          md-list-item.secondary-button-padding.md-3-line(
+            dir-paginate='activo in $ctrl.activosBodega | itemsPerPage: 1'  
+            total-items='$ctrl.totalActivos' 
+            current-page="$ctrl.current")
+            //-md-icon(md-font-library="material-icons"  ng-class='activo.estado') {{activo.icon}}
+            .md-list-item-text(layout='column')
+              h3
+                strong
+                  | Activo {{activo.serial}}
+              h4 {{activo.cliente_nombre}} 
+                | {{activo._marca + ' - ' + activo._modelo }}
+              md-icon.md-secondary.md-primary(
+                style='cursor:pointer'  
+                md-font-library="material-icons" 
+                ng-click='$ctrl.verificar(activo)') move_to_inbox
+                md-tooltip Verificar activo
+              //-md-select.md-secondary.md-primary(
+                ng-model='ngModel'
+                placeholder='Contacto ')
+                md-option(
+                    value='gg'
+                    ng-repeat='nxOption in [1,2,3,4,5,6]'
+                ) qwertyuiopasdfghjklñzxcvbnm
+            md-divider
+          div(layout-padding layout='row')
+            nix-text(
+              ng-change='$ctrl.liveSearch()'
+              flex='80'
+              label='Buscar'
+              ng-model='$ctrl.buscar')
+            md-button.md-primary( flex ng-click='$ctrl.buscarActivos()')  Buscar 
+        div(layout='row' flex layout-align='center center')
+          dir-pagination-controls(
+            flex 
+            align='center' 
+            on-page-change="$ctrl.allActivos($ctrl.filter,newPageNumber)")
+      md-content(flex layout-padding )
+        form(name='$ctrl.alistarFrm' ng-submit='$ctrl.alistar($event)' )
+          div(layout='row')
+            nix-text(
+              flex='30'
+              required='true'
+              label='Numero de entrega fisico'
+              ng-model='$ctrl.model.inventario'
+              name='inventario'
+              frm="$ctrl.alistarFrm.inventario")
+          div(layout='row')
+            nix-text(
+              flex
+              required='true'
+              label='Numero de entrega asociado'
+              ng-model='$ctrl.model.inventario'
+              name='inventario'
+              frm="$ctrl.alistarFrm.inventario")
+            nix-text(
+              flex
+              required='true'
+              label='Numero de entrega asociado'
+              ng-model='$ctrl.model.inventario'
+              name='inventario'
+              frm="$ctrl.alistarFrm.inventario")
+          div(layout='row')
+            nix-text(
+              flex
+              required='true'
+              label='Numero de entrega asociado'
+              ng-model='$ctrl.model.inventario'
+              name='inventario'
+              frm="$ctrl.alistarFrm.inventario")
+            nix-text(
+              flex
+              required='true'
+              label='Numero de entrega asociado'
+              ng-model='$ctrl.model.inventario'
+              name='inventario'
+              frm="$ctrl.alistarFrm.inventario")
+          br
+          md-button.md-primary.md-rised( type='submit' ) Pasar a entrega        
+                  
+                  
+                  
+                  
+                  
+                  

@@ -60,7 +60,7 @@ export function bifrostService($http, $hummer) {
   }
 
   function insert(val,custom) {
-
+    typeof val == 'object' ? custom = true : custom = false;
     //Si es una inserción personalizada
     if(custom){
       //divide el objeto ingresado en valores y llaves
@@ -178,6 +178,24 @@ export function bifrostService($http, $hummer) {
     return methods;
   }
 
+  function carActivo(_entity = 'caracteristica_activo') {
+    entity = _entity;
+    return methods;
+  }
+
+  function subEntrega(_entity = 'sub_entrega') {
+    entity = _entity;
+    return methods;
+  }
+
+  function licencia(_entity = 'licencia') {
+    entity = _entity;
+    return methods;
+  }
+
+  this.subEntrega = subEntrega;
+  this.licencia = licencia;
+  this.carActivo = carActivo;
   this.software = software;
   this.base =  base;
   this.carActivo = carActivo;
