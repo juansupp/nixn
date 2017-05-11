@@ -2,7 +2,7 @@ div(layout='row', layout-align='center center')
   md-content(layout-padding )
     md-card-title
       md-card-title-text
-        span.md-headline Registrar ordenes de entrega
+        span.md-headline Registrar ordenes de retiro
         p.md-body-1
           |  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, iure, molestias. Deleniti, totam, saepe. Harum, quis deserunt dolores reiciendis ab dolorum non rerum, accusantium, nesciunt laborum illo esse hic quaerat!
     md-content(layout='row')
@@ -27,7 +27,7 @@ div(layout='row', layout-align='center center')
                 style='cursor:pointer'
                 md-font-library="material-icons"
                 ng-click='$ctrl.pasarOrden(activo)') trending_flat
-                md-tooltip Pasar a entrega
+                md-tooltip Pasar a retiro
             md-divider
           div(layout-padding layout='row')
             nix-text(
@@ -41,7 +41,7 @@ div(layout='row', layout-align='center center')
             align='center'
             on-page-change="$ctrl.allActivos($ctrl.filter,newPageNumber)")
       md-content(flex layout-padding )
-        form(name='$ctrl.entregaFrm' ng-submit='$ctrl.entr($event)' )
+        form(name='$ctrl.retiroFrm' ng-submit='$ctrl.entr($event)' )
           div(layout='row')
             //-N Orden
             nix-text(
@@ -50,7 +50,7 @@ div(layout='row', layout-align='center center')
               label='Numero de orden'
               ng-model='$ctrl.model.nOrden'
               name='nOrden'
-              frm="$ctrl.entregaFrm.inventario")
+              frm="$ctrl.retiroFrm.inventario")
             //-Cliente
             nix-select(
               flex
@@ -60,7 +60,7 @@ div(layout='row', layout-align='center center')
               ng-change='$ctrl.loadContactos()'
               ng-model='$ctrl.model.cliente'
               nx-data='$ctrl.nxData.cliente'
-              frm="$ctrl.entregaFrm.cliente")
+              frm="$ctrl.retiroFrm.cliente")
             //-Area
             nix-select(
               flex
@@ -70,13 +70,13 @@ div(layout='row', layout-align='center center')
               ng-change='$ctrl.loadContactos()'
               ng-model='$ctrl.model.area'
               nx-data='$ctrl.nxData.area'
-              frm="$ctrl.entregaFrm.area")
+              frm="$ctrl.retiroFrm.area")
           md-card
             md-list
               div(layout='row')
-                md-subheader(flex).md-no-sticky Lista de activos para entrega
+                md-subheader(flex).md-no-sticky Lista de activos para retiro
               md-list-item.secondary-button-padding.md-3-line(
-                ng-repeat='activo in $ctrl.activosEntrega')
+                ng-repeat='activo in $ctrl.activosretiro')
                 //-md-icon(md-font-library="material-icons"  ng-class='activo.estado') {{activo.icon}}
                 .md-list-item-text(layout='column')
                   h3
@@ -108,4 +108,4 @@ div(layout='row', layout-align='center center')
                     md-tooltip Observaciones
                 md-divider
           br
-          md-button.md-primary.md-rised( type='submit' ) Registrar entrega
+          md-button.md-primary.md-rised( type='submit' ) Registrar retiro

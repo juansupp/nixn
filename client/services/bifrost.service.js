@@ -193,6 +193,18 @@ export function bifrostService($http, $hummer) {
     return methods;
   }
 
+  function contacto(_entity='contacto'){
+    entity = _entity;
+    return methods;
+  }
+
+  function entrega(_entity='entrega'){
+    entity = _entity;
+    return methods;
+  }
+
+  this.entrega = entrega;
+  this.contacto = contacto;
   this.subEntrega = subEntrega;
   this.licencia = licencia;
   this.carActivo = carActivo;

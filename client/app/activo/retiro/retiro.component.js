@@ -1,9 +1,9 @@
 //Librerias a usar
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import routes from './entrega.routes';
+import routes from './retiro.routes';
 
-export class entregaComponent {
+export class retiroComponent {
   /*@ngInject*/
   constructor($bi,$scope,$select,$pop,$dialog,$nxData) {
     this.$scope = $scope;
@@ -42,32 +42,32 @@ export class entregaComponent {
   }
 
   currenTotal (filter) {
-    //Se consulta sub entrega para traer las sub entregas ligadas
-    this.$bi.activo('full_sub_entrega')
+    //Se consulta sub retiro para traer las sub retiros ligadas
+    this.$bi.activo('full_sub_retiro')
       .find(['count(id_activo) total'],filter)
       .then(response => this.totalActivos = response.data[0].total);
   }
 
   allActivos(filter,page) {
     this.currenTotal(filter);
-    this.$bi.activo('full_sub_entrega')
+    this.$bi.activo('full_sub_retiro')
       .paginate(filter,page-1,10)
       .then(response =>  this.activosAlistados = response.data);
   }
 
   insertOrden(){
-    return this.$bi.entrega().insert({n_entrega : this.model.nOrden })
+    return this.$bi.retiro().insert({n_retiro : this.model.nOrden })
       .then(response => response = response.data[0])
   }
 
-  attachEntrega(idSubEntrega,idEntrega){
+  attachretiro(idSubretiro,idretiro){
     let valObj = {
-      fk_id_entrega : idEntrega,
+      fk_id_retiro : idretiro,
       estado : 1 // ahora esta afuera de bodega
     }, whereObj = {
-      id_sub_entrega : idSubEntrega
+      id_sub_retiro : idSubretiro
     };
-    return this.$bi.subEntrega().update(valObj,whereObj)
+    return this.$bi.subretiro().update(valObj,whereObj)
   }
 
   attachContacto(idActivo,idContacto){
@@ -80,18 +80,18 @@ export class entregaComponent {
     return this.$bi.activo().update(valObj,whereObj)
   }
   //!!!!Nucleo nix
-  entregar (ev) {
+  retiror (ev) {
     //Primero se inserta la orden
     this.insertOrden().then(orden => {
       console.log(orden)
-      //Luego se recorre cada una de las sub_entregas (activo)
-      this.activosEntrega.forEach(activo => {
-        //Se liga la sub_entrega con entrega null a la recien ingresada
-        this.attachEntrega(activo.id_sub_entrega,orden); //async
+      //Luego se recorre cada una de las sub_retiros (activo)
+      this.activosretiro.forEach(activo => {
+        //Se liga la sub_retiro con retiro null a la recien ingresada
+        this.attachretiro(activo.id_sub_retiro,orden); //async
         //Se liga el contacto seleccionado con el activo seleccionado
         this.attachContacto(activo.id_activo,activo.contacto); //async
       });
-      this.$pop.show('Entrega registrada satisfactoriamente');
+      this.$pop.show('retiro registrada satisfactoriamente');
     });
   }
 
@@ -110,18 +110,18 @@ export class entregaComponent {
   /* devuelve true si ha campo invalido*/
   police(){
     //Recorremos cada uno de los activos
-    this.activosEntrega.forEach(activo => {
+    this.activosretiro.forEach(activo => {
       //if(activo.contacto)
     });
   }
 
   pasarOrden(activo,rollBack=false){
-    //Se agrega el activo seleccionado a la lista de entrega
+    //Se agrega el activo seleccionado a la lista de retiro
     //Si no hay rollback
-    if(!rollBack) this.activosEntrega.push(activo);
+    if(!rollBack) this.activosretiro.push(activo);
     //se elimina el activo seleccionado de la lista de activos alistados
     //Si hay rollback
-    else _.remove(this.activosEntrega, {id_activo: activo.id_activo});
+    else _.remove(this.activosretiro, {id_activo: activo.id_activo});
   }
   /**/
   $onInit(){
@@ -131,11 +131,11 @@ export class entregaComponent {
     this.contactos = new Array();
     //lista de activos en tabla de alistados
     this.activosAlistados = new Array();
-    //lista de ativos en la tabla de entrega
-    this.activosEntrega = new Array();
+    //lista de ativos en la tabla de retiro
+    this.activosretiro = new Array();
     //filtro global para la paginación
     //ciclo 1 = los activos alistados
-    //estado 0 = sub_entrega en proceso
+    //estado 0 = sub_retiro en proceso
     this.filter = new Object({ciclo : 1, estado:0});
     //Busca principalmente todos los activos con ciclo 1
     this.allActivos(this.filter,1);
@@ -149,8 +149,8 @@ export class entregaComponent {
   }
 }
 
-export default angular.module('nixApp.entrega', [uiRouter])
-.config(routes).component('entrega', {
-  template: require('./entrega.pug'),
-  controller: entregaComponent
+export default angular.module('nixApp.retiro', [uiRouter])
+.config(routes).component('retiro', {
+  template: require('./retiro.pug'),
+  controller: retiroComponent
 }).name;
