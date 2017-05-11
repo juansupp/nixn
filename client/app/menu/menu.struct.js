@@ -51,14 +51,14 @@ exports = module.exports = [{
     icon: 'move_to_inbox',
     state: 'm.alistarActivo',
     title: 'Alistar activo'
-  },{ 
+  },{
     icon: 'settings_applications',
     state: 'm.configActivo',
     title: 'Configurar tipos de activos'
   },{
     icon: 'assignment',
-    state: 'm.adminInventario',
-    title: 'Administrar'
+    state: 'm.entrega',
+    title: 'Orden de entrega'
   },{
     icon: 'description',
     state: 'm.hojaActivo',

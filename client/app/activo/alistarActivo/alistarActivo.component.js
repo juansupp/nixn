@@ -73,7 +73,7 @@ export class AlistarActivoComponent {
               let idSubEntrega = subEntrega.data[0].id_sub_entrega;
                 //Licencia si se ingresaron softwares.
               this.$bi.licencia()
-                .insert({fk_id_sub_entrega : idSubEntrega})
+                .insert({fk_id_sub_entrega : idSubEntrega},true)
                 .then(licencia => {
                   this.$pop.show('Activo listo para entrega');
                 });

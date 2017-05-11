@@ -60,7 +60,7 @@ export function bifrostService($http, $hummer) {
   }
 
   function insert(val,custom) {
-    typeof val == 'object' ? custom = true : custom = false;
+    //typeof val == 'object' ? custom = true : custom = false;
     //Si es una inserción personalizada
     if(custom){
       //divide el objeto ingresado en valores y llaves

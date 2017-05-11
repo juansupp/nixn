@@ -8,7 +8,7 @@ div(layout='row', layout-align='center center')
           b es necesario ligar el activo a un cliente para trabajar adecuadamente con el,
           | por defecto el activo se registrará en bodega
           | Una vez registrado te redireccionará a una nueva ventana para poder ligarlo.
-    form(name='activoForm', ng-submit='$ctrl.nuevoActivo(activoForm)')
+    form(name='activoForm', ng-submit='$ctrl.nuevoActivo($event)')
       //-Tipo de activo
       nix-select(
         flex

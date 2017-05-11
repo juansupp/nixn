@@ -6,7 +6,7 @@ import routes from './addActivo.routes';
 
 export class AddActivoComponent {
   /*@ngInject*/
-  constructor($select, $bi, $hummer, $pop,$q,$nxData,$scope) {
+  constructor($select, $bi, $hummer, $pop,$q,$nxData,$scope,$dialog) {
     this.$select = $select;
     this.$bi = $bi;
     this.$hummer = $hummer;
@@ -14,6 +14,7 @@ export class AddActivoComponent {
     this.$q = $q;
     this.nxData = $nxData;
     this.$scope = $scope;
+    this.$dialog = $dialog;
   }
 
   loadCaracteristicas(idTipo) {
@@ -29,6 +30,7 @@ export class AddActivoComponent {
   }
 
   selectTipoActivo(){
+    //ESPERA POR el la digestión en proceso
     _.defer(()=>{
       console.log(this.model.tipoActivo);
       //Por defecto se resetea la vista de las caracteristicas
@@ -38,7 +40,7 @@ export class AddActivoComponent {
       //Cargamos las caracteristicas del tipo de activo seleccionado
       this.loadCaracteristicas(this.model.tipoActivo)
         .then(response => {
-
+          console.log(response)
           //En caso que hayan caracteristicas
           if(response.data.length > 0){
             //Se muestra el campo de las caracteristicas
@@ -158,32 +160,29 @@ export class AddActivoComponent {
         this.model = new Object();*/
   }
 
-///*****//FOCUS******//***///
-  nuevoActivo(frm) {
-    console.log(this.model)
-    //Se valida que los input de caracteristicas sean validos
-    if(this.validateCarValues()){
-      //Desabilitamos en botón de registro para evitar duplicidad
-      this.disabled.submit = true;
-      //Convertimos a modelo el formulario
-      let
-        model = this.$hummer.castFormToModel(frm);
-
-
-
-      this.getMarca().then(rMarca => {
-        this.getModelo(rMarca).then(rModelo => {
-          //Pre modelo
-          this.getActivo(rModelo).then(rActivo => {
-            //Post modelo
-            this.getCaracteristicaValor(rActivo);
+  nuevoActivo(ev) {
+    this.$dialog.confirm(ev,'Confirmación','¿Seguro que desea registrar el activo?')
+      .then(() => {
+          //Se valida que los input de caracteristicas sean validos
+        if(this.validateCarValues()){
+          //Desabilitamos en botón de registro para evitar duplicidad
+          this.disabled.submit = true;
+          this.getMarca().then(rMarca => {
+            this.getModelo(rMarca).then(rModelo => {
+              //Pre modelo
+              this.getActivo(rModelo).then(rActivo => {
+                //Post modelo
+                this.getCaracteristicaValor(rActivo);
+                //
+                this.$pop.show('Activo registro Satisfactoriamente')
+              })
+            })
           })
-        })
-      })
+        }else {
+          this.$pop.show('Debes seleccionar las especificaciones del activo');
+        }
+      });
 
-    }else {
-      this.$pop.show('Debes seleccionar las especificaciones del activo');
-    }
   }
 
 
