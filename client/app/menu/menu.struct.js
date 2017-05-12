@@ -60,8 +60,12 @@ exports = module.exports = [{
     state: 'm.entrega',
     title: 'Orden de entrega'
   },{
+    icon: 'assignment',
+    state: 'm.retiro',
+    title: 'Orden de retiro'
+  },{
     icon: 'description',
-    state: 'm.hojaActivo',
+    state: 'm.hojaVida',
     title: 'Hoja de vida'
   }]
 }]

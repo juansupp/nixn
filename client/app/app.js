@@ -47,8 +47,9 @@ import documTicket from './ticket/documTicket/documTicket.component';
 import adminCliente from './cliente/adminCliente/adminCliente.component';
 import adminUsuario from './usuario/adminUsuario/adminUsuario.component';
 import configActivo from './activo/configActivo/configActivo.component';
-
+import retiro from './activo/retiro/retiro.component';
 import entrega from './activo/entrega/entrega.component';
+import hojaVida from './activo/hojaVida/hojaVida.component';
 import pruebas from './pruebas/pruebas.component';
 import alistarActivo from './activo/alistarActivo/alistarActivo.component';
 import assignActivo from './ticket/assignActivo/assignActivo.component';
@@ -68,13 +69,12 @@ import '../../node_modules/angular-material-data-table/dist/md-data-table.min.cs
 angular.module('nixApp', [
     ngCookies, ngResource, ngSanitize, uiRouter, constants, util, ngMaterial,
     ngMessages, ngLoading, ngFileUpload, ngMoment,ngPagination,mdDataTable,
-
     //==>EXTERNAL MODUELES
     bifrost, pop, dialog, hummer, select, timer, nxData, imagenix,
     //==> SERVICES
     login, menu, master, addUsuario, addCliente, addActivo, addTicket,
     adminTicket,documTicket,adminCliente,adminUsuario, configActivo,pruebas,
-    entrega,alistarActivo,assignActivo,
+    entrega,alistarActivo,assignActivo,retiro,hojaVida,
     // ==> COMPONENTS
     featuresList,activoList,nixText,nixSelect,nixAuto
     // ==> DIRECTIVES

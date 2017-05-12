@@ -5,20 +5,20 @@ const uiRouter = require('angular-ui-router');
 import route from './adminTicket.route';
 export class adminActivoComponent {
   /*@ngInject*/
-  constructor($bi,$hummer,$pop) {
+  constructor($bi, $hummer, $pop) {
     this.$bi = $bi;
     this.$hummer = $hummer;
     this.$pop = $pop;
   }
 
-  searchactivos(){
-    this.$bi.activo().paginate()
+  searchactivos() {
+    this.$bi.activo().paginate();
   }
 
-  allUsers(filter,page) {
+  allUsers(filter, page) {
     this.currenTotal(filter);
     this.$bi.activo()
-      .paginate(filter,page-1,2)
+      .paginate(filter, page - 1, 2)
       .then(response => this.activos = response.data);
   }
 
@@ -34,21 +34,21 @@ export class adminActivoComponent {
     let model = this.$hummer.castFormToModel(frm);
     if(model.contrasena === model._contrasena){
       let
-      valObj = {
-        apellido : model.apellido,
-        nombre : model.nombre,
-        correo : model.correo,
-        telefono : model.telefono,
-        rol : model.rol,
-        contrasena : model.contrasena
-      },
-      whereObj = {
-        id_activo : this.selected.id_activo
-      };
+        valObj = {
+          apellido : model.apellido,
+          nombre : model.nombre,
+          correo : model.correo,
+          telefono : model.telefono,
+          rol : model.rol,
+          contrasena : model.contrasena
+        },
+        whereObj = {
+          id_activo : this.selected.id_activo
+        };
 
-      this.$bi.activo().update(valObj,whereObj)
-        .then(()=>this.$pop.show('activo actualizado satisfactoriamente'));
-    }else {
+      this.$bi.activo().update(valObj, whereObj)
+        .then(() => this.$pop.show('activo actualizado satisfactoriamente'));
+    } else {
       this.$pop.show('Las credenciales son incorrectas');
     }
 
@@ -89,7 +89,7 @@ export class adminActivoComponent {
 
 export default
   angular
-  .module('nixApp.adminTicket', [])
+  .module('nixApp.adminTicket', [uiRouter])
   .config(route)
   .component('adminTicket', {
     template: require('./adminTicket.pug'),
