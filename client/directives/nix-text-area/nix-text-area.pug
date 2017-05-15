@@ -1,1 +1,8 @@
-div this is the nixTextArea directive
+md-input-container.md-block(flex)
+  label {{label}}
+  textarea(
+    name='{{name}}' 
+    ng-required='required' 
+    ng-model ='ngModel' )
+  .errors(ng-messages="frm.$error")
+      div(ng-message='required') Campo requerido.

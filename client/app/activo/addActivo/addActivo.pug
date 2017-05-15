@@ -18,8 +18,7 @@ div(layout='row', layout-align='center center')
         ng-model='$ctrl.model.tipoActivo'
         ng-change='$ctrl.selectTipoActivo()'
         nx-data='$ctrl.nxData.tipoActivo'
-        frm='activoForm.tipoActivo'
-      )
+        frm='activoForm.tipoActivo')
       br
       //-Serial
       nix-text(
@@ -39,20 +38,17 @@ div(layout='row', layout-align='center center')
           nx-data='$ctrl.nxData.marca'
           frm='activoForm.marca'
           nx-change='$ctrl.selectMarca()'
-          nx-text='$ctrl.text.marca'
-        )
+          nx-text='$ctrl.text.marca')
         //- Modelo se carga por marca ng-disabled="$ctrl.disabled.modelo"
         nix-auto(
           flex
-
           required='true',
           name='modelo',
           label='Modelo',
           ng-model='$ctrl.model.modelo',
           nx-data='$ctrl.nxData.modelo'
           frm='activoForm.modelo'
-          nx-text='$ctrl.text.modelo'
-        )
+          nx-text='$ctrl.text.modelo')            
       div(layout='row')
         //-Seguridad
         nix-text(
@@ -60,16 +56,14 @@ div(layout='row', layout-align='center center')
           required='false',
           name='seguridad'
           ng-model='$ctrl.model.seguridad'
-          label='Seguridad'
-        )
+          label='Seguridad')
         //-Inventario
         nix-text(
           flex
           required='false',
           name='inventario'
           ng-model='$ctrl.model.inventario'
-          label='Inventario'
-        )
+          label='Inventario')
       div(layout='column' ng-if='$ctrl.showCar')
         md-card-title
           md-card-title-text

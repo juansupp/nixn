@@ -6,7 +6,7 @@ export function routeConfig($compileProvider,$mdDateLocaleProvider,$urlRouterPro
   $urlRouterProvider.otherwise('/');
   $mdThemingProvider.theme('default')
         .primaryPalette('blue')
-        .accentPalette('orange');
+        .accentPalette('brown');
   $locationProvider.html5Mode(true);
   //fecha
   $compileProvider.preAssignBindingsEnabled(true);

@@ -57,6 +57,7 @@ import assignActivo from './ticket/assignActivo/assignActivo.component';
 import featuresList from '../directives/featuresList/featuresList.directive';
 import activoList from '../directives/activoList/activoList.directive';
 import nixText from '../directives/nix-text/nix-text.directive';
+import nixTextArea from '../directives/nix-text-area/nix-text-area.directive';
 import nixSelect from '../directives/nix-select/nix-select.directive';
 import nixAuto from '../directives/nix-auto/nix-auto.directive';
 //STYLESHEETS
@@ -76,7 +77,7 @@ angular.module('nixApp', [
     adminTicket,documTicket,adminCliente,adminUsuario, configActivo,pruebas,
     entrega,alistarActivo,assignActivo,retiro,hojaVida,
     // ==> COMPONENTS
-    featuresList,activoList,nixText,nixSelect,nixAuto
+    featuresList,activoList,nixText,nixSelect,nixAuto,nixTextArea,
     // ==> DIRECTIVES
   ])
   .config(routeConfig)

@@ -48,36 +48,35 @@ export class AddTicketComponent {
 
 
 
-  insertTicket(nTicket){
+  insertTicket(nTicket,fkServicio){
     let
       //Se acorta la variable
       idCreador = (this.$cookieStore.get('user')).id_usuario,
-      /* Se crea el arreglo  para ingresar el ticket
-      arrValTicket = [
-        nTicket,
-        "F",
-        "X", //=> X = aun no se cierra ticket
-        this.model.tecnico,
-        idCreador,
-        'null',
-        this.model.servicio.value,
-        this.model.origen
-      ],*/
       objTicket = {
         N_Ticket : nTicket,
-        estado: "F",
-        cierre : 'X',
+        estado: "F", // Estado F = pendiente por activo
+        cierre : 'X', // Cierre X no se ha cerrado
         fk_id_tecnico : this.model.tecnico,
         fk_id_creador : idCreador,
-        fk_id_servicio : this.model.servicio.value,
+        fk_id_servicio : fkServicio,
         fk_id_origen : this.model.origen
       };
 
     return this.$bi.ticket().insert(objTicket,true)
       .then(response => {
-        console.log(response);
         return response.data[0].id_ticket;
       });
+  }
+
+  getServicio(){
+    if(!this.model.servicio)
+     return this.$bi.servicio().insert([this.text.servicio])
+       .then(response => {  return response.data[0].id_servicio});
+     else{
+       let deferred = this.$q.defer();
+       deferred.resolve( this.model.servicio.value )
+       return deferred.promise;
+     }
   }
 
   insertDocumentacion(fkTicket){
@@ -117,7 +116,6 @@ export class AddTicketComponent {
   }
 
   nuevoTicket(ev,frm) {
-    console.log('buenas')
     if(this.policeActivo()){
       this.getLastTicket().then(lastTicket => {
         //
@@ -127,14 +125,16 @@ export class AddTicketComponent {
           let texto = "¿Desea registrar un nuevo ticket?";
         //
         this.$dialog.confirm(ev,titulo, texto).then(()=>{
-          this.insertTicket(lastTicket).then(ticket => {
-            this.insertDocumentacion(ticket).then(documentacion=>{
-              this.insertImagen(documentacion)
-                .then(response =>
-                  this.$pop.show('Ticket Registrado satisfactoriamente')
-                )
+          this.getServicio().then(servicio => {
+            this.insertTicket(lastTicket,servicio).then(ticket => {
+              this.insertDocumentacion(ticket).then(documentacion=>{
+                this.insertImagen(documentacion)
+                  .then(response =>
+                    this.$pop.show('Ticket Registrado satisfactoriamente')
+                  )
+              })
             })
-          })
+          });
         })
       })
     }

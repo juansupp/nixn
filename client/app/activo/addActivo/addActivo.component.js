@@ -125,7 +125,7 @@ export class AddActivoComponent {
   getMarca () {
    if(!this.model.marca)
     return this.$bi.marca().insert([this.text.marca])
-      .then(response =>{ return response.data[0].id_marca});
+      .then(response => { console.log("RES : " ,response); return response.data[0].id_marca});
     else{
       let deferred = this.$q.defer();
       deferred.resolve( this.model.marca.value )

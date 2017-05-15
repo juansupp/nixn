@@ -56,6 +56,12 @@ div(layout='row', layout-align='center center')
               ng-model='$ctrl.model.seguridad'
               name='seguridad'
               frm="$ctrl.alistarFrm.seguridad")
+          nix-text-area(
+            flex
+            label='Observaciones'
+            ng-model='$ctrl.model.descripcion'
+            name='descripcion'
+            frm="$ctrl.alistarFrm.descripcion")
           div(layout='row')
             md-chips(
               flex

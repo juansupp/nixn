@@ -79,7 +79,7 @@ export default class ructor {
 
   insert(entity, val,custom='') {
     let
-      sentence = `insert into ${entity} ${custom} Output inserted.id_${entity} values (${val}) `
+      sentence = `declare @t table (id_${entity} int) insert into ${entity} ${custom} Output inserted.id_${entity}  into @t values (${val}) select * from @t `
       //"insert into " + entity + " Output inserted.id_"+ entity +" values (" + val + ")"
     console.dir(sentence);
     return this.con(sentence, true);
