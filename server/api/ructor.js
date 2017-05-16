@@ -17,7 +17,7 @@ export default class ructor {
       //server : "186.29.68.122",
       //server: "localhost\\SQLEXPRESS", // You can use 'localhost\\instance' to connect to named instance
       database: 'mastodonx',
-      server : "170.117.20.7",
+      server : "170.117.20.208",
     }
 
 
@@ -87,6 +87,12 @@ export default class ructor {
 
   update(entity, val,where) {
     let sentence = 'update ' + entity +' set ' + val + ' where ' + where;
+    //console.dir(sentence);
+    return this.con(sentence, false);
+  }
+
+  delete(entity,where) {
+    let sentence = 'delete ' + entity +' where ' + where;
     //console.dir(sentence);
     return this.con(sentence, false);
   }

@@ -1,0 +1,37 @@
+div(layout='row' layout-padding)
+  // Caracteristicas 
+  div(flex ng-repeat='software in $ctrl.software')
+    nix-text(
+      ng-disabled='true'
+      label='Tipo de activo'
+      ng-model='$ctrl.activo.tipo ')
+  //Activo 
+  div(flex)
+    nix-text(
+      ng-disabled='true'
+      label='Tipo de activo'
+      ng-model='$ctrl.activo.tipo_activo')
+    nix-text(
+      ng-disabled='true'
+      label='Serial'
+      ng-model='$ctrl.activo.serial')
+    nix-text(
+      ng-disabled='true'
+      label='Inventario'
+      ng-model='$ctrl.activo.inventario')
+  div(flex)
+    nix-text(
+      ng-disabled='true'
+      label='Seguridad'
+      ng-model='$ctrl.activo.seguridad')
+    nix-text(
+      ng-disabled='true'
+      label='Serial'
+      ng-model='$ctrl.activo.marca')
+    nix-text(
+      ng-disabled='true'
+      label='Inventario'
+      ng-model='$ctrl.activo.modelo')
+    
+    
+  

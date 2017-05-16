@@ -16,7 +16,8 @@ function nixText(){
             required : '=',
             name : '=',
             frm : '=',
-            type : '@'
+            type : '@',
+            ngDisabled : '='
         },
         link : link
     };

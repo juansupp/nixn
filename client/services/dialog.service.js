@@ -14,9 +14,22 @@ export function dialogService($mdDialog) {
       .ok('Aceptar')
       .cancel('Cancelar');
 
-    return $mdDialog.show(confirm)
+    return $mdDialog.show(confirm);
   }
 
+  function custom (ev,controller,template) {
+    console.dir(controller);
+    let customObj = {
+      controller: controller,
+      controllerAs : '$ctrl',
+      template: template,
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }
+    return $mdDialog.show(customObj);
+  }
+  this.custom = custom;
   this.confirm = confirm;
 }
 

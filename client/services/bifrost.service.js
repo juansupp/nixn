@@ -10,9 +10,20 @@ export function bifrostService($http, $hummer) {
       insert: insert,
       all: all,
       update : update,
-      paginate : paginate
+      paginate : paginate,
+      delete : delete
     };
   /*ACTIONS*/
+  function delete (whereObj) {
+    let
+      where = whereObj ? $hummer.objectToSentence(whereObj) : '1=1',
+      dataObject = {
+        where: where,
+        entity: entity
+      };
+    return $http.delete(url + '/', dataObject);
+  }
+
   function update (valObj,whereObj){
     let
       where = whereObj ? $hummer.objectToSentence(whereObj) : '1=1',

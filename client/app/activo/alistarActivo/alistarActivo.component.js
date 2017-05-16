@@ -18,7 +18,6 @@ export class AlistarActivoComponent {
   transformChip(chip) {
     // If it is an object, it's already a known chip
     if (angular.isObject(chip)) {
-      console.log(chip)
       return chip;
     }
     // Otherwise, create a new one
@@ -99,7 +98,6 @@ export class AlistarActivoComponent {
 
     this.getLastTicket().then(nTicket => {
 
-      console.log('wuq?',nTicket)
 
       let objTicket = {
         N_Ticket : nTicket,
@@ -113,7 +111,6 @@ export class AlistarActivoComponent {
       };
       this.$bi.ticket().insert(objTicket,true)
         .then(response => {
-          console.log('D:',response)
 
           let
             //Se acorta variable
@@ -150,7 +147,7 @@ export class AlistarActivoComponent {
         this.$bi.subEntrega()
           .insert({fk_id_activo : activo.id_activo},true)
           .then(subEntrega => {
-            //Si hubo inserción de software 
+            //Si hubo inserción de software
             if(this.softwareSelect.length > 0) {
               let idSubEntrega = subEntrega.data[0].id_sub_entrega;
                 //Licencia si se ingresaron softwares.

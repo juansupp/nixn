@@ -7,7 +7,7 @@ let
 /*var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();*/
 
-
+router.delete('/',controller._delete);
 router.get('/', controller.index);
 router.post('/find', controller.find);
 router.post('/', controller.insert);

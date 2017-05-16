@@ -23,7 +23,20 @@ div(layout='row', layout-align='center center')
                 | {{activo._marca + ' - ' + activo._modelo }}
               p  {{activo.inventario}} / {{activo.seguridad}}
               md-icon.md-secondary.md-primary(
-                aria-label='bum2'
+                aria-label='undoActivo'
+                style='cursor:pointer'
+                md-font-library="material-icons"
+                ng-click='$ctrl.undoActivo($event,activo)') undo
+                md-tooltip Devolver a alistamiento
+              md-icon.md-secondary.md-primary(
+                aria-label='seeDatos'
+                style='cursor:pointer'
+                md-font-library="material-icons"
+                ng-click='$ctrl.showDatos($event,activo)') spellcheck
+                md-tooltip Verificar datos
+              md-icon.md-secondary.md-primary(
+                ng-disabled='activo.disabled'
+                aria-label='pasarOrden'
                 style='cursor:pointer'
                 md-font-library="material-icons"
                 ng-click='$ctrl.pasarOrden(activo)') trending_flat
@@ -34,7 +47,10 @@ div(layout='row', layout-align='center center')
               flex='80'
               label='Buscar'
               ng-model='$ctrl.buscar')
-            md-button.md-primary( flex ng-click='$ctrl.buscarActivos()')  Buscar
+            md-button.md-primary(
+              flex 
+              ng-disabled='activo.disabled' 
+              ng-click='$ctrl.buscarActivos()')  Buscar
         div(layout='row' flex layout-align='center center')
           dir-pagination-controls(
             flex
@@ -62,15 +78,15 @@ div(layout='row', layout-align='center center')
               nx-data='$ctrl.nxData.cliente'
               frm="$ctrl.entregaFrm.cliente")
             //-Area
-            nix-select(
-              flex
-              required='true'
-              name='area'
-              label='Area'
-              ng-change='$ctrl.loadContactos()'
-              ng-model='$ctrl.model.area'
-              nx-data='$ctrl.nxData.area'
-              frm="$ctrl.entregaFrm.area")
+              nix-select(
+                flex
+                required='true'
+                name='area'
+                label='Area'
+                ng-change='$ctrl.loadContactos()'
+                ng-model='$ctrl.model.area'
+                nx-data='$ctrl.nxData.area'
+                frm="$ctrl.entregaFrm.area")
           md-card
             md-list
               div(layout='row')

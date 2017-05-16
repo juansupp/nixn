@@ -36,6 +36,12 @@ export function update (req,res){
   Ructor.update(entity,val,where).then(response => res.send(response))
 }
 
+export function _delete(req,res) {
+  let where = req.body.where,
+    entity = req.body.entity;
+  Ructor.delete(entity,where).then(response => res.send(response))
+}
+
 export function pagination (req,res){
   /*Pagina y tabla */
   let

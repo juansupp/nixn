@@ -14,17 +14,6 @@ export class entregaComponent {
     this.nxData = $nxData;
   }
 
-  transformChip(chip) {
-    // If it is an object, it's already a known chip
-    if (angular.isObject(chip)) {
-      console.log(chip)
-      return chip;
-    }
-    // Otherwise, create a new one
-    return { _software: chip}
-  }
-
-
   buscarActivos(){
     let value = `'%${this.buscar}%'`;
     if(this.buscar.length >= 4) {
@@ -36,7 +25,6 @@ export class entregaComponent {
         inventario :value,
         seguridad : value,
       };
-      console.log(this.filter)
       this.allActivos(this.filter,this.current);
     }
   }
@@ -83,7 +71,6 @@ export class entregaComponent {
   entregar (ev) {
     //Primero se inserta la orden
     this.insertOrden().then(orden => {
-      console.log(orden)
       //Luego se recorre cada una de las sub_entregas (activo)
       this.activosEntrega.forEach(activo => {
         //Se liga la sub_entrega con entrega null a la recien ingresada
@@ -115,13 +102,65 @@ export class entregaComponent {
     });
   }
 
+  undoActivo(ev,activo){
+    //pasar activo a lista de alistamiento en bodega (ciclo 0)
+    //
+    this.$dialog
+      .confirm(ev,'Confirmación','¿Seguro que desea pasar a alistamiento este equipo nuevamente? ')
+      .then(response => {
+        this.$bi.activo().update({ciclo : '0' },{id_activo : activo.id_activo})
+        this.$bi.subEntrega().delete({fk_id_activo:  activo.id_activo});
+    });
+  }
+
+  showDatos (ev,activo) {
+    console.log(activo);
+    this.activo = activo;
+    //Abrir el dialogo y mostrar esp, soft y datos
+    this.$dialog.custom(ev,() => this,require('./datos.pug'));
+    //Campos para el dialogo de datos
+    this.showCaracteristicas(activo);
+    //
+    this.showSoftware(activo);
+  }
+
+
+
+  showSoftware(activo) {
+    this.$bi.licencia("full_licencia")
+      .all({fk_id_activo :  activo.id_activo})
+      .then(software => this.software = software.data);
+  }
+
+  showCaracteristicas(activo) {
+    //Busca todas las caracteristicas del activo en parametro
+    this.$bi.car("full_caracteristica")
+      .all({id_activo : activo.id_activo})
+      .then(caracteristicas => {
+        //se crea nueva variable scope para agregar las caracteristicas
+        this.caracteristicas = new Array();
+        //Recorre cada una de las caracteristicas
+        caracteristicas.data.forEach(car => {
+          //Agrega objeto personalizado al array
+          // d = disaply, v = value
+          this.caracteristicas.push({d : car._caracteristica, v: car._valor })
+        });
+    });
+  }
+
   pasarOrden(activo,rollBack=false){
     //Se agrega el activo seleccionado a la lista de entrega
     //Si no hay rollback
-    if(!rollBack) this.activosEntrega.push(activo);
+    if(!rollBack) {
+      this.activosEntrega.push(activo);
+      activo.disabled = true;
+    }
     //se elimina el activo seleccionado de la lista de activos alistados
     //Si hay rollback
-    else _.remove(this.activosEntrega, {id_activo: activo.id_activo});
+    else {
+      _.remove(this.activosEntrega, {id_activo: activo.id_activo});
+      activo.disabled = false;
+    }
   }
   /**/
   $onInit(){
