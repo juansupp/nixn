@@ -73,20 +73,21 @@ div(layout='row', layout-align='center center')
               required='true'
               name='cliente'
               label='Cliente'
-              ng-change='$ctrl.loadContactos()'
+              ng-change='$ctrl.loadAreas()'
               ng-model='$ctrl.model.cliente'
               nx-data='$ctrl.nxData.cliente'
               frm="$ctrl.entregaFrm.cliente")
-            //-Area
-              nix-select(
-                flex
-                required='true'
-                name='area'
-                label='Area'
-                ng-change='$ctrl.loadContactos()'
-                ng-model='$ctrl.model.area'
-                nx-data='$ctrl.nxData.area'
-                frm="$ctrl.entregaFrm.area")
+            //Area
+            nix-select(
+              flex
+              required='true'
+              name='area'
+              label='Area'
+              ng-change='$ctrl.loadContactos()'
+              ng-model='$ctrl.model.area'
+              wait-for-where='true'
+              nx-data='$ctrl.nxData.area'
+              frm="$ctrl.entregaFrm.area")
           md-card
             md-list
               div(layout='row')
@@ -106,7 +107,9 @@ div(layout='row', layout-align='center center')
                     input(type='text' ng-model='activo.contacto.correo')
                   //Contacto
                   nix-auto.md-secondary.fix-size(
+                    wait-for-where='true'
                     label='Contacto'
+                    nx-text = '' 
                     ng-model='activo.contacto._contacto'
                     nx-data='$ctrl.nxData.contacto'
                   )

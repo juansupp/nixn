@@ -98,10 +98,9 @@ export class AlistarActivoComponent {
 
     this.getLastTicket().then(nTicket => {
 
-
       let objTicket = {
         N_Ticket : nTicket,
-        estado : "P", // Estado P = en proceso
+        estado : "N", // Estado N= ALISTAMIENTO
         cierre : 'X', // Cierre X no se ha cerrado
         fk_id_tecnico : this.$cookieStore.get('user').id_usuario,
         fk_id_creador : this.$cookieStore.get('user').id_usuario,
@@ -126,7 +125,6 @@ export class AlistarActivoComponent {
             };
             //
             this.$bi.documentacion().insert(objDocum,true)
-
         })
     });
   }
@@ -149,13 +147,16 @@ export class AlistarActivoComponent {
           .then(subEntrega => {
             //Si hubo inserción de software
             if(this.softwareSelect.length > 0) {
-              let idSubEntrega = subEntrega.data[0].id_sub_entrega;
-                //Licencia si se ingresaron softwares.
-              this.$bi.licencia()
-                .insert({fk_id_sub_entrega : idSubEntrega},true)
-                .then(licencia => {
-                  this.$pop.show('Activo listo para entrega');
-                });
+              //Recorre cada una de los software's en el chip
+              this.softwareSelect.forEach(software => {
+                //acorte de memoria (ADM)
+                let idSubEntrega = subEntrega.data[0].id_sub_entrega;
+                //Se inserta la licencia con el software y sub_entrega ligado
+                this.$bi.licencia()
+                  .insert({
+                    fk_id_sub_entrega : idSubEntrega,
+                    fk_id_software : software.id_software},true);
+              });
             } else {
               this.$pop.show('Activo listo para entrega');
             }
@@ -223,7 +224,7 @@ export class AlistarActivoComponent {
                         //Finalmente se agregan la caracteristica
                         this.caracteristicas.push(obj)
                         //Se hace copia de caracteristicas para verificar si hay modificaciones o no
-                        this.original.car.push(obj)
+                        this.original.car.push({selected : carActivo.id_caracteristica_valor})
                       }
                     });
                   });

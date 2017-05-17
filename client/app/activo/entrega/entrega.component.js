@@ -82,39 +82,53 @@ export class entregaComponent {
     });
   }
 
-  loadContactos(){
+  loadAreas () {
     //Esperamos la digestión de angular
     _.defer(() => {
       //Si se ha seleccionado cliente
       if(this.model.cliente.length > 0)
-        //Cargamos todos los contactos
-        this.$bi.contacto('full_contacto')
-          .all({fk_id_cliente : this.model.cliente})
-          .then(response => this.contactos = response.data)
-    });
+        //Se agrega el filtro para buscar todas las areas del cliente seleccionado
+        this.nxData.area.w = { fk_id_cliente : this.model.cliente };
 
+    });
+  }
+  loadContactos(){
+    //Esperamos la digestión de angular
+    _.defer(() => {
+      //Si se ha seleccionado area
+      if(this.model.area.length > 0)
+        //Cargamos todos los contactos
+        this.nxData.contacto.w = { fk_id_area : this.model.area };
+    });
   }
   /* devuelve true si ha campo invalido*/
   police(){
+    //variable agente// por defecto no hay nada invalido
+    let agent = false;
     //Recorremos cada uno de los activos
     this.activosEntrega.forEach(activo => {
-      //if(activo.contacto)
+      // SI no hay contacto adjunto al activo el agente lo retornará 
+      if(!activo.contacto) agent  = true;
     });
+    return agent;
   }
 
   undoActivo(ev,activo){
-    //pasar activo a lista de alistamiento en bodega (ciclo 0)
-    //
+    //Confirmación
     this.$dialog
       .confirm(ev,'Confirmación','¿Seguro que desea pasar a alistamiento este equipo nuevamente? ')
       .then(response => {
+        //Actualiza el activo y lo pasa al ciclo 0 en bodega
         this.$bi.activo().update({ciclo : '0' },{id_activo : activo.id_activo})
+        //Elimina la sub entrega creada
         this.$bi.subEntrega().delete({fk_id_activo:  activo.id_activo});
+        //Elimina el ticket creado en el alistamiento
+        this.$bi.ticket().delete({fk_id_activo : activo.id_activo, estado : 'N'})
     });
   }
 
   showDatos (ev,activo) {
-    console.log(activo);
+    //Globaliza el activo
     this.activo = activo;
     //Abrir el dialogo y mostrar esp, soft y datos
     this.$dialog.custom(ev,() => this,require('./datos.pug'));
@@ -124,11 +138,9 @@ export class entregaComponent {
     this.showSoftware(activo);
   }
 
-
-
   showSoftware(activo) {
     this.$bi.licencia("full_licencia")
-      .all({fk_id_activo :  activo.id_activo})
+      .all({id_activo :  activo.id_activo})
       .then(software => this.software = software.data);
   }
 
@@ -164,6 +176,8 @@ export class entregaComponent {
   }
   /**/
   $onInit(){
+    //filtros personalizados para cliente y area
+    this.clientFilter = new Array();
     //lista de areas de el cliente seleccionado
     this.areas = new Array();
     //lista de contactos segun el cliente que se eliga

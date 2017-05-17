@@ -1,37 +1,53 @@
-div(layout='row' layout-padding)
-  // Caracteristicas 
-  div(flex ng-repeat='software in $ctrl.software')
-    nix-text(
-      ng-disabled='true'
-      label='Tipo de activo'
-      ng-model='$ctrl.activo.tipo ')
-  //Activo 
-  div(flex)
-    nix-text(
-      ng-disabled='true'
-      label='Tipo de activo'
-      ng-model='$ctrl.activo.tipo_activo')
-    nix-text(
-      ng-disabled='true'
-      label='Serial'
-      ng-model='$ctrl.activo.serial')
-    nix-text(
-      ng-disabled='true'
-      label='Inventario'
-      ng-model='$ctrl.activo.inventario')
-  div(flex)
-    nix-text(
-      ng-disabled='true'
-      label='Seguridad'
-      ng-model='$ctrl.activo.seguridad')
-    nix-text(
-      ng-disabled='true'
-      label='Serial'
-      ng-model='$ctrl.activo.marca')
-    nix-text(
-      ng-disabled='true'
-      label='Inventario'
-      ng-model='$ctrl.activo.modelo')
-    
-    
-  
+div(layout='column' layout-padding )
+  // SOFTWARE 
+  div(layout='column')
+    md-subheader(flex).md-no-sticky Software instalado
+    md-chips(
+      ng-model='$ctrl.software' 
+      readonly='true'
+      placeholder='Software')
+      md-chip-template
+        strong {{$chip._software}}
+  div(layout='column')
+    md-subheader(flex).md-no-sticky Datos basicos del activo
+    div(layout='row') 
+      nix-text(
+        flex
+        ng-disabled='true'
+        label='Tipo de activo'
+        ng-model='$ctrl.activo._tipo_activo')
+      nix-text(
+        flex
+        ng-disabled='true'
+        label='Serial'
+        ng-model='$ctrl.activo.serial')
+      nix-text(
+        flex
+        ng-disabled='true'
+        label='Inventario'
+        ng-model='$ctrl.activo.inventario')
+    div(layout='row')
+      nix-text(
+        flex
+        ng-disabled='true'
+        label='Seguridad'
+        ng-model='$ctrl.activo.seguridad')
+      nix-text(
+        flex
+        ng-disabled='true'
+        label='Marca'
+        ng-model='$ctrl.activo._marca')
+      nix-text(
+        flex
+        ng-disabled='true'
+        label='Modelo'
+        ng-model='$ctrl.activo._modelo')  
+    div(leyout='column')
+      md-subheader(flex).md-no-sticky Especificaciones
+      div(leyout='row')
+        nix-text(
+          ng-repeat='caracteristica in $ctrl.caracteristicas'
+          flex
+          label='{{caracteristica.d}}'
+          ng-disabled='true'
+          ng-model='caracteristica.v')

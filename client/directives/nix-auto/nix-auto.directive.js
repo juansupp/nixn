@@ -14,8 +14,17 @@ function nixAuto($bi,$select){
         };
         //Cada vez que en el controlador invocado se modifique la variable
         scope.$watch('nxData', data =>{
-          if(data) // => en caso que no sea vacio
-            loadData(); // => se carga de nuevo los datos
+          if(data){ // => en caso que no sea vacio
+            if(scope.waitForWhere){ // => En caso que espere el where
+              console.log('the data',data);
+              if(data.w){ // => Y haya where
+                console.log("foom", scope.waitForWhere);
+                loadData();
+              } // => se carga de nuevo los datos
+            } else {
+              loadData();
+            } // => si no espera where se carga de una vez
+          }
         },() => {});
         //Funcion de carga datos de la base
         function loadData() {
@@ -51,6 +60,7 @@ function nixAuto($bi,$select){
       restrict: 'EA',
       require:"^ngModel",
       scope : {
+        waitForWhere : '@',
         nxChange : '&',
         ngModel : '=',
         nxText : '=?',
