@@ -1,0 +1,30 @@
+div(layout='column' layout-padding )
+  // SOFTWARE 
+  div(layout='column')
+    md-subheader(flex).md-no-sticky Software instalado
+    md-chips(
+      ng-model='$ctrl.software' 
+      readonly='true'
+      placeholder='Software')
+      md-chip-template
+        strong {{$chip._software}}
+  div(layout='column')
+    md-subheader(flex).md-no-sticky Datos basicos del activo
+    div(layout='row') 
+      nix-text(
+        flex
+        label='Inventario'
+        ng-model='$ctrl.activo.inventario')
+      nix-text(
+        flex
+        label='Seguridad'
+        ng-model='$ctrl.activo.seguridad')
+    div(leyout='column')
+      md-subheader(flex).md-no-sticky Especificaciones
+      div(leyout='row')
+        nix-text(
+          ng-repeat='caracteristica in $ctrl.caracteristicas'
+          flex
+          label='{{caracteristica.d}}'
+          ng-disabled='true'
+          ng-model='caracteristica.v')

@@ -58,7 +58,8 @@ function nixSelect ($bi) {
         required : '@',
         name : '=',
         frm : '=',
-        mdNoUnderline :'@'
+        mdNoUnderline :'@',
+        placeholder : '@'
       },
       link : link
     };

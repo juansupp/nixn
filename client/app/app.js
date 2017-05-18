@@ -53,6 +53,7 @@ import hojaVida from './activo/hojaVida/hojaVida.component';
 import pruebas from './pruebas/pruebas.component';
 import alistarActivo from './activo/alistarActivo/alistarActivo.component';
 import assignActivo from './ticket/assignActivo/assignActivo.component';
+import adminActivo from './activo/adminActivo/adminActivo.component'; 
 //Directives
 import featuresList from '../directives/featuresList/featuresList.directive';
 import activoList from '../directives/activoList/activoList.directive';
@@ -75,7 +76,7 @@ angular.module('nixApp', [
     //==> SERVICES
     login, menu, master, addUsuario, addCliente, addActivo, addTicket,
     adminTicket,documTicket,adminCliente,adminUsuario, configActivo,pruebas,
-    entrega,alistarActivo,assignActivo,retiro,hojaVida,
+    entrega,alistarActivo,assignActivo,retiro,hojaVida, adminActivo,
     // ==> COMPONENTS
     featuresList,activoList,nixText,nixSelect,nixAuto,nixTextArea,
     // ==> DIRECTIVES

@@ -48,6 +48,10 @@ exports = module.exports = [{
     state: 'm.addActivo',
     title: 'Agregar'
   },{
+    icon: 'add',
+    state: 'm.adminActivo',
+    title: 'Inventario general'
+  },{
     icon: 'move_to_inbox',
     state: 'm.alistarActivo',
     title: 'Alistar activo'

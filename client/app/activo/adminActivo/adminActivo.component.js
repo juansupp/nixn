@@ -2,97 +2,108 @@
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
 
-import route from './adminTicket.route';
+import route from './adminActivo.route';
 export class adminActivoComponent {
   /*@ngInject*/
-  constructor($bi, $hummer, $pop) {
+  constructor($bi, $hummer, $pop,$nxData,$dialog) {
     this.$bi = $bi;
     this.$hummer = $hummer;
     this.$pop = $pop;
+    this.nxData = $nxData;
+    this.$dialog = $dialog;
   }
 
-  searchactivos() {
-    this.$bi.activo().paginate();
+  loadAreas () {
+    //Esperamos la digestión de angular
+    _.defer(() => {
+      //Si se ha seleccionado cliente
+      if(this.model.id_cliente.length > 0){
+        //Se agrega el filtro para buscar todas las areas del cliente seleccionado
+        this.nxData.area.w = { fk_id_cliente : this.model.id_cliente };
+        this.allActivos();
+      }
+    });
+  }
+  loadContactos(){
+    //Esperamos la digestión de angular
+    _.defer(() => {
+      //Si se ha seleccionado area
+      if(this.model.id_area.length > 0){
+        //Cargamos todos los contactos
+        this.nxData.contacto.w = { fk_id_area : this.model.id_area };
+        this.allActivos();
+      }
+    });
+  }
+  showDatos(ev,activo) {
+    //Globaliza el activo
+    this.activo = activo;
+    //Abrir el dialogo y mostrar esp, soft y datos
+    this.$dialog.custom(ev,() => this,require('./datos.pug'));
+    //Campos para el dialogo de datos
+    this.showCaracteristicas(activo);
+    //
+    this.showSoftware(activo);
   }
 
-  allUsers(filter, page) {
-    this.currenTotal(filter);
-    this.$bi.activo()
-      .paginate(filter, page - 1, 2)
-      .then(response => this.activos = response.data);
+  showSoftware(activo) {
+    this.$bi.licencia("full_licencia")
+      .all({id_activo :  activo.id_activo})
+      .then(software => this.software = software.data);
+  }
+
+  showCaracteristicas(activo) {
+    //Busca todas las caracteristicas del activo en parametro
+    this.$bi.car("full_caracteristica")
+      .all({id_activo : activo.id_activo})
+      .then(caracteristicas => {
+        //se crea nueva variable scope para agregar las caracteristicas
+        this.caracteristicas = new Array();
+        //Recorre cada una de las caracteristicas
+        caracteristicas.data.forEach(car => {
+          //Agrega objeto personalizado al array
+          // d = disaply, v = value
+          this.caracteristicas.push({d : car._caracteristica, v: car._valor })
+        });
+    });
+  }
+  allActivos(page) {
+    //Esperamos la digestión
+    _.defer(() => {
+      let filter = this.model;
+
+      this.currenTotal(filter);
+      this.$bi.activo('full_activo')
+        .paginate(filter,page-1,50)
+        .then(response => {
+          console.log(response.data);
+        //this.tickets = _.sortBy(response.data, 'N_Ticket').reverse();
+        this.activos = response.data;
+      });
+
+    })
   }
 
   currenTotal (filter) {
-    this.$bi.activo()
+    return this.$bi.activo('full_activo')
       .find(['count(id_activo) total'],filter)
-      .then(response => this.totalTickets = response.data[0].total);
-  }
-
-
-  updateactivo(frm) {
-    //Se convierte el formulario a modelo para poder extraer los valores
-    let model = this.$hummer.castFormToModel(frm);
-    if(model.contrasena === model._contrasena){
-      let
-        valObj = {
-          apellido : model.apellido,
-          nombre : model.nombre,
-          correo : model.correo,
-          telefono : model.telefono,
-          rol : model.rol,
-          contrasena : model.contrasena
-        },
-        whereObj = {
-          id_activo : this.selected.id_activo
-        };
-
-      this.$bi.activo().update(valObj, whereObj)
-        .then(() => this.$pop.show('activo actualizado satisfactoriamente'));
-    } else {
-      this.$pop.show('Las credenciales son incorrectas');
-    }
-
-
+      .then(response => this.totalActivos = response.data[0].total);
   }
 
   $onInit(){
+    this.totalActivos = new Object();
     this.current = 1;
-
-    this.allUsers({"1":"1"},1);
-    // ARRAY  => OBJECTS !!
-    this.selected = new Array();
-    /**
-     * Dont use
-     */
-    this.activos = [
-      {
-        nombre : 'Juan',
-        apellido : 'Gom',
-        correo : 'correo',
-        id_activo : 1,
-      },{
-        nombre : 'Juan2',
-        apellido : 'Gom2',
-        correo : 'correo2',
-        id_activo : 2,
-      },{
-        nombre : 'Juan3',
-        apellido : 'Gom3',
-        correo : 'correo3',
-        id_activo : 3,
-      }
-    ]
-    /*this.$bi.activo().all()
-      .then(response => this.activos = response.data);*/
+    this.allActivos(1);
   }
+
 }
 
 export default
   angular
-  .module('nixApp.adminTicket', [uiRouter])
+  .module('nixApp.adminActivo', [uiRouter])
   .config(route)
-  .component('adminTicket', {
-    template: require('./adminTicket.pug'),
-    controller: adminTicketComponent
+  .component('adminActivo', {
+    template: require('./adminActivo.pug'),
+    controller: adminActivoComponent
   })
   .name;
