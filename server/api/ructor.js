@@ -19,9 +19,6 @@ export default class ructor {
       database: 'mastodonx',
       server : "170.117.20.208",
     };
-
-
-
 /*"username": "sa",
 "password": "sa@123",
 "database": "test",
@@ -31,8 +28,6 @@ export default class ructor {
 "dialectOptions": {
 "instanceName": "SQLEXPRESS"
 }*/
-
-
     return new Promise(function(resolve, reject) {
       let connection = new sql.Connection(config, err => {
         console.dir("error : "  + err)

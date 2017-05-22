@@ -31,6 +31,7 @@ export class AssignActivoComponent {
         `Está seguro que desea asignar el activo con
         serial ${this.activoSeleccionado.serial} al ticket numero ${ticket.N_Ticket}`);
   }
+
   assignActivo(ticket,event){
     console.log(ticket)
     this.confirmAssign(ticket,event).then(()=>{
@@ -52,14 +53,26 @@ export class AssignActivoComponent {
     return this.$bi.ticket().update(valObj,whereObj);
   }
 
+
+  filterByRol() {
+    let
+      usuario = this.$cookieStore.get('user'),
+      filtro = new Object({1:'1'});
+
+    if ( usuario.id_rol == 3)
+      filtro = { fk_id_tecnico :  usuario.id_usuario }
+
+    this.$bi.ticket('f_Ticket')
+      .all(filtro)
+      .then(response => {
+        this.fTickets = response.data;
+    });
+  }
+
   $onInit() {
     this.fTickets = new Object();
     this.activoSeleccionado = new Object();
-
-    this.$bi.ticket('f_Ticket').all().then(response => {
-      this.fTickets = response.data;
-    })
-
+    this.filterByRol();
   }
 }
 

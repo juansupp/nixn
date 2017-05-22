@@ -8,11 +8,23 @@ export class MenuComponent {
   /*@ngInject*/
   constructor(STRUCT, $cookieStore, $state, $dialog) {
     this.structMenu = STRUCT;
-    this.message = 'Hello';
     this.$cookieStore = $cookieStore;
     this.$state = $state;
     this.$dialog = $dialog;
   }
+
+  allowItems(){
+    let rol = this.$cookieStore.get('user');
+    //console.log(this.structMenu);
+    this.structMenu.forEach(menu => {
+      menu.items.forEach(item =>  {
+        //console.log(item.allow,rol.id_rol)
+        if( item.allow.includes(rol.id_rol) ) item.show = true;
+        else item.show = false;
+      })
+    });
+  }
+
   closeSession(event) {
     let title = '¿Deseas cerrar sesión?',
       text = 'Se perderá el cache y las preferencias hasta la proxima sesión';
@@ -23,10 +35,13 @@ export class MenuComponent {
         this.$state.go('login');
       });
   }
+
   serf(destiny){
     this.$state.go(destiny);
   }
+
   $onInit() {
+    this.allowItems();
     if (!this.$cookieStore.get('user')) this.$state.go('login');
   }
 }

@@ -38,6 +38,11 @@ import nxData from '../services/nxData.service'
 import login from './login/login.component';
 import menu from './menu/menu.component';
 import master from './main/master/master.component';
+import bodega from './main/bodega/bodega.component';
+import creator from './main/creator/creator.component';
+import tech from './main/tech/tech.component';
+import minAdmin from './main/minAdmin/minAdmin.component';
+
 import addUsuario from './usuario/addUsuario/addUsuario.component';
 import addCliente from './cliente/addCliente/addCliente.component';
 import addActivo from './activo/addActivo/addActivo.component';
@@ -53,7 +58,7 @@ import hojaVida from './activo/hojaVida/hojaVida.component';
 import pruebas from './pruebas/pruebas.component';
 import alistarActivo from './activo/alistarActivo/alistarActivo.component';
 import assignActivo from './ticket/assignActivo/assignActivo.component';
-import adminActivo from './activo/adminActivo/adminActivo.component'; 
+import adminActivo from './activo/adminActivo/adminActivo.component';
 //Directives
 import featuresList from '../directives/featuresList/featuresList.directive';
 import activoList from '../directives/activoList/activoList.directive';
@@ -68,6 +73,8 @@ import '../../node_modules/angular-loading-bar/build/loading-bar.min.css'
 //import '../../node_modules/angular-material-accordion/css/ang-accordion.css'
 import '../../node_modules/angular-material-data-table/dist/md-data-table.min.css'
 
+
+
 angular.module('nixApp', [
     ngCookies, ngResource, ngSanitize, uiRouter, constants, util, ngMaterial,
     ngMessages, ngLoading, ngFileUpload, ngMoment,ngPagination,mdDataTable,
@@ -76,7 +83,8 @@ angular.module('nixApp', [
     //==> SERVICES
     login, menu, master, addUsuario, addCliente, addActivo, addTicket,
     adminTicket,documTicket,adminCliente,adminUsuario, configActivo,pruebas,
-    entrega,alistarActivo,assignActivo,retiro,hojaVida, adminActivo,
+    entrega,alistarActivo,assignActivo,retiro,hojaVida, adminActivo,bodega,
+    creator,tech,minAdmin,
     // ==> COMPONENTS
     featuresList,activoList,nixText,nixSelect,nixAuto,nixTextArea,
     // ==> DIRECTIVES

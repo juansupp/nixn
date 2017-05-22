@@ -20,9 +20,13 @@ export class AdminTicketComponent {
     //this.moment = moment;
   }
 
+
+
   allTickets(filter,page) {
     if (filter)
       filter["tipo"] = 'II';
+    filter['tecnico']   = this.$cookieStore.get('user').id_usuario
+    console.log(filter);
     this.currenTotal(filter);
     this.$bi.ticket('full_ticket')
       .paginate(filter,page-1,10)
@@ -62,6 +66,8 @@ export class AdminTicketComponent {
 
 
   $onInit() {
+    this.logg = this.$cookieStore.get('user');
+    //
     this.current = 1;
     //Carga todos los tickets sin filtro inicial
     this.allTickets({tipo: 'II'},1);

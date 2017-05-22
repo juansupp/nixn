@@ -11,6 +11,7 @@ div(layout='row' layout-align='center center')
       .md-toolbar-tools
         //-Tecnicos
         md-select.md-no-underline(
+          ng-hide='$ctrl.logg.id_rol ===  3'
           ng-model='$ctrl.model.tecnico'
           placeholder='Tecnico'
           ng-change="$ctrl.allTickets($ctrl.model)")
@@ -24,7 +25,7 @@ div(layout='row' layout-align='center center')
           ng-change="$ctrl.allTickets($ctrl.model)")
           md-option(
             ng-value='cliente.id_cliente'
-            ng-repeat='cliente in $ctrl.clientes') {{cliente.nombre}}
+            ng-repeat='cliente in $ctrl.clientes') {{cliente._cliente}}
         //-Servicios
         md-select.md-no-underline(
           ng-model='$ctrl.model.servicio'
@@ -72,7 +73,7 @@ div(layout='row' layout-align='center center')
                 a( ui-sref="m.documTicket({id:ticket.id_ticket,modo:ticket.estado})") {{ticket.titulo}}
             h4 {{ticket.cliente_nombre}} &nbsp
               i.material-icons.arrow keyboard_tab
-              | &nbsp {{ticket.usuario_final}}
+              | &nbsp {{ticket._contacto}}
             p Ticket # {{ticket.N_ticket}} a cargo de {{ticket.tecnico_nombre}} y &nbsp
               | creado por {{ticket.creador}} el {{ticket.fecha}}.
             md-icon.md-secondary(style='cursor:pointer' md-font-library="material-icons" ui-sref="m.documTicket({id:ticket.id_ticket,modo:'E'})") arrow_upward
