@@ -5,7 +5,7 @@ import route from './documTicket.routes';
 
 export class DocumTicketCmponent {
   /*@ngInject*/
-  constructor($q,$imagenix, moment, $http, $select, $bi, $hummer, $pop, $scope, $cookieStore, $time, $stateParams) {
+  constructor($q,$imagenix, moment, $http, $select, $bi, $hummer, $pop, $scope, $cookieStore, $time, $stateParams,$state) {
     this.$select = $select;
     this.$bi = $bi;
     this.$hummer = $hummer;
@@ -18,10 +18,12 @@ export class DocumTicketCmponent {
     this.moment = moment;
     this.$imagenix = $imagenix;
     this.$q = $q;
+    this.$state = $state;
 
   }
   messageRight() {
-    this.$pop.show("Documentacion registrada satisfactoriamente")
+    this.$pop.show("Documentacion registrada satisfactoriamente");
+    this.$state.go('m.adminTicket');
   }
   openFeatures(feature) {
     this.features[feature].visible = !this.features[feature].visible;
@@ -193,7 +195,7 @@ export class DocumTicketCmponent {
       this.cargarTecnicos();
 
     //
-    let url = 'http://picasaweb.google.com/data/entry/api/user/mortombolo@gmail.com?alt=json';
+    let url = 'http://picasaweb.google.com/data/entry/api/user/micorreo@gmail.com?alt=json';
     this.$http.get(url).then(response => this.image = response.data.entry.gphoto$thumbnail.$t).catch(err => console.log(err))
     // data => entry => gphoto$thumbnail ==> $t
    // this.features = require('./docum.struct')
