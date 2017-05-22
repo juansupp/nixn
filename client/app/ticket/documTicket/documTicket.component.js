@@ -167,7 +167,7 @@ export class DocumTicketCmponent {
   }
 
   cargarTecnicos() {
-    this.$bi.usuario("tecnicos").all().then(response => {
+    this.$bi.usuario().all({fk_id_rol : 3}).then(response => {
       this.tecnicos = response.data;
     })
   }
