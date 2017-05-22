@@ -2,7 +2,7 @@
 
 export default function($stateProvider) {
   'ngInject';
-  $stateProvider.state('adminUsuario', {
+  $stateProvider.state('m.adminUsuario', {
     url: '/adminUsuario',
     template: '<admin-usuario></admin-usuario>'
   });

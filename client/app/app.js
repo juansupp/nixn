@@ -59,6 +59,7 @@ import pruebas from './pruebas/pruebas.component';
 import alistarActivo from './activo/alistarActivo/alistarActivo.component';
 import assignActivo from './ticket/assignActivo/assignActivo.component';
 import adminActivo from './activo/adminActivo/adminActivo.component';
+import perfil from './perfil/perfil.component'
 //Directives
 import featuresList from '../directives/featuresList/featuresList.directive';
 import activoList from '../directives/activoList/activoList.directive';
@@ -84,7 +85,7 @@ angular.module('nixApp', [
     login, menu, master, addUsuario, addCliente, addActivo, addTicket,
     adminTicket,documTicket,adminCliente,adminUsuario, configActivo,pruebas,
     entrega,alistarActivo,assignActivo,retiro,hojaVida, adminActivo,bodega,
-    creator,tech,minAdmin,
+    creator,tech,minAdmin,perfil,
     // ==> COMPONENTS
     featuresList,activoList,nixText,nixSelect,nixAuto,nixTextArea,
     // ==> DIRECTIVES

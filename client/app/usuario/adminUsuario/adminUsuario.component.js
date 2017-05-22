@@ -11,10 +11,6 @@ export class adminUsuarioComponent {
     this.$pop = $pop;
   }
 
-  searchUsuarios(){
-    this.$bi.usuario().paginate()
-  }
-
   allUsers(filter,page) {
     this.currenTotal(filter);
     this.$bi.usuario()
@@ -29,7 +25,7 @@ export class adminUsuarioComponent {
   }
 
 
-  updateUsuario(frm) {
+  /*updateUsuario(frm) {
     //Se convierte el formulario a modelo para poder extraer los valores
     let model = this.$hummer.castFormToModel(frm);
     if(model.contrasena === model._contrasena){
@@ -53,7 +49,7 @@ export class adminUsuarioComponent {
     }
 
 
-  }
+  }*/
 
   $onInit(){
     this.current = 1;
@@ -61,29 +57,7 @@ export class adminUsuarioComponent {
     this.allUsers({"1":"1"},1);
     // ARRAY  => OBJECTS !!
     this.selected = new Array();
-    /**
-     * Dont use
-     */
-    this.usuarios = [
-      {
-        nombre : 'Juan',
-        apellido : 'Gom',
-        correo : 'correo',
-        id_usuario : 1,
-      },{
-        nombre : 'Juan2',
-        apellido : 'Gom2',
-        correo : 'correo2',
-        id_usuario : 2,
-      },{
-        nombre : 'Juan3',
-        apellido : 'Gom3',
-        correo : 'correo3',
-        id_usuario : 3,
-      }
-    ]
-    /*this.$bi.usuario().all()
-      .then(response => this.usuarios = response.data);*/
+    
   }
 }
 

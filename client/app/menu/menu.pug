@@ -18,8 +18,8 @@ section.mort(layout='column')
         md-button.md-icon-button(ng-click='$ctrl.closeSession($event)', aria-label='More2')
           i.material-icons power_settings_new
           md-tooltip Cerrar sesi&oacute;n
-        md-button.md-icon-button(aria-label='More3')
-          i.material-icons face
+        md-button.md-icon-button(aria-label='More3' ui-sref='m.perfil')
+          i.material-icons portrait
           md-tooltip Perfil
   md-content.mort(layout='column', flex='', layout-padding='')
     div(ui-view='')

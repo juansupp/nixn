@@ -1,0 +1,77 @@
+div(layout='row', layout-align='center center')
+  md-content(layout-padding='' flex='50')
+    md-card-title
+      md-card-title-text
+        span.md-headline Perfil
+        p.md-body-1
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ducimus quas alias iusto, voluptas esse, aspernatur nobis reprehenderit! Provident, error eaque veniam maxime optio in dolorem sequi quaerat voluptate quae.
+    form(name='$ctrl.perfilForm', ng-submit='$ctrl.updateUser()')
+      div(layout='row')
+        //-Apellido
+        nix-text(
+          flex
+          required='true',
+          label='Apellido',
+          ng-model='$ctrl.model.apellido',
+          name='apellido',
+          frm='$ctrl.perfilForm.apellido'
+        )
+        //-Nombre
+        nix-text(
+          flex  
+          required='true',
+          label='Nombre',
+          ng-model='$ctrl.model.nombre',
+          name='nombre',
+          frm='$ctrl.perfilForm.nombre'
+        )
+      div(layout='row')
+        //- Telefono
+        nix-text(
+          flex
+          required='false',
+          label='Telefono',
+          ng-model='$ctrl.model.telefono',
+          name='telefono',
+        )
+        //- Correo
+        nix-text(
+          flex
+          type='email'
+          required='true',
+          label='Correo',
+          ng-model='$ctrl.model.correo',
+          name='correo',
+          frm='$ctrl.perfilForm.correo'
+        )
+        //- Rol
+        nix-select(
+          flex
+          required='true',
+          name='rol',
+          label='Rol',
+          ng-model='$ctrl.model.fk_id_rol',
+          nx-data='$ctrl.nxData.rol',
+          frm='$ctrl.perfilForm.rol'
+        )
+      div(layout='row')
+        //-Contraseñas
+        nix-text(
+          flex
+          type='password'
+          name='contrasena'
+          label='Contraseña',
+          ng-model='$ctrl.model.pass',
+          frm='$ctrl.perfilForm.contrasena'
+        )
+        nix-text(
+          flex
+          type='password'
+          name='_contrasena'
+          label='Contraseña de nuevo',
+          ng-model='$ctrl.model._pass',
+          frm='$ctrl.perfilForm._contrasena'
+        )
+      md-button.md-primary(
+        type='submit', 
+        ng-disabled='$ctrl.btnDisabled') Actualizar

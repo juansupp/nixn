@@ -29,7 +29,7 @@ export class AdminClienteComponent {
   currenTotal (filter) {
     this.$bi.cliente('full_out_contacto')
       .find(['count(id_contacto) total'],filter)
-      .then(response => this.totalTickets = response.data[0].total);
+      .then(response => this.totalClientes = response.data[0].total);
   }
 
 
