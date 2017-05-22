@@ -16,7 +16,7 @@ export default class ructor {
       password: 'A*96NIXZ1996', // JS EN CASA
       //server : "186.29.68.122",
       //server: "localhost\\SQLEXPRESS", // You can use 'localhost\\instance' to connect to named instance
-      database: 'mastodonx',
+      database: 'mastodonp', // MASTODONX = PRODUCTION
       server : "170.117.20.208",
     };
 /*"username": "sa",

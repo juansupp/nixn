@@ -13,39 +13,53 @@ export class AddClienteComponent {
     this.$pop = $pop;
     this.$state = $state;
   }
-  search(query){
-    return this.$select.search(query);
+
+  end(){
+    this.$pop.show('Cliente registrado satisfactoriamente');
+    this.model = new Object();
+    this.btnDisabled = false;  
   }
-  nuevoCliente(frm) {
+
+  nuevoCliente() {
     this.btnDisabled = true;
-    let model = this.$hummer.castFormToModel(frm);
-    if (model._contrasena === model.contrasena) {
-      let arrVal = [
-        model.cliente,
-        model.sede,
-        model.direccion,
-        model.telefono,
-        model.contacto,
-        model.correo,
-        model.contrasena
-      ];
-      //??
-      this.$bi.cliente().insert(arrVal)
-        .then(() =>{
-          this.$pop.show('Cliente registrado satisfactoriamente.');
-          this.model = new Object();
+    this.insertCliente().then(cliente => {
+      this.insertArea(cliente).then(area => {
+        this.insertContacto(area).then(() => {
+
         });
-    } else {
-      this.btnDisabled = false;
-      this.$pop.show('Las contraseñas no coinciden');
-    }
+      })
+
+    });
+
   }
+
+
+  insertCliente() {
+    let arrVal = [
+      this.model.cliente,
+      this.model.sede,
+      this.model.direccion,
+      this.model.telefono
+    ];
+    return this.$bi.cliente()
+      .insert(arrVal)
+      .then(inserted =>   inserted.data[0].id_cliente);
+  }
+  insertArea (cliente) {
+    return this.$bi.area()
+      .insert([this.model.area,cliente])
+      .then(inserted =>  inserted.data[0].id_area);
+  }
+  insertContacto(area){
+    return this.$bi.contacto()
+      .insert([this.model.contacto,this.model.correo,area])
+  }
+
+
+
   $onInit(){
     this.btnDisabled = false;
-    this.$bi.cliente().find(['distinct nombre_empresa'])
-      .then(response =>
-        this.$select.list = this.$hummer.objectToArray(response.data)
-      );
+
   }
 }
 
