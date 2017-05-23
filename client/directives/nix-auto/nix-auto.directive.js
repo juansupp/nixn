@@ -16,9 +16,7 @@ function nixAuto($bi,$select){
         scope.$watch('nxData', data =>{
           if(data){ // => en caso que no sea vacio
             if(scope.waitForWhere){ // => En caso que espere el where
-              console.log('the data',data);
               if(data.w){ // => Y haya where
-                console.log("foom", scope.waitForWhere);
                 loadData();
               } // => se carga de nuevo los datos
             } else {

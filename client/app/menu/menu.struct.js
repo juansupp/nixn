@@ -4,9 +4,9 @@ exports = module.exports = [{
   title: 'Ticket',
   items: [{
     allow : [1,2,5],
-    icon: 'add',
+    icon: 'fiber_new',
     state: 'm.addTicket',
-    title: 'Agregar'
+    title: 'Agregar ticket'
   }, {
     allow : [1,2,3,4,5],
     icon: 'content_paste',
@@ -14,7 +14,7 @@ exports = module.exports = [{
     title: 'Administrar'
   },{
     allow : [1,2,3],
-    icon: 'content_paste',
+    icon: 'spellcheck',
     state: 'm.assignActivo',
     title: 'Asignar activo'
   }]
@@ -22,9 +22,9 @@ exports = module.exports = [{
   title: 'Clientes',
   items: [{
     allow : [1,2,5],
-    icon: 'add',
+    icon: 'fiber_new',
     state: 'm.addCliente',
-    title: 'Agregar'
+    title: 'Agregar cliente'
   },{
     allow : [1,2,5],
     icon: 'supervisor_account',
@@ -35,9 +35,9 @@ exports = module.exports = [{
   title: 'Usuarios',
   items: [{
     allow : [1,2,5],
-    icon: 'add',
+    icon: 'fiber_new',
     state: 'm.addUsuario',
-    title: 'Agregar'
+    title: 'Agregar usuario'
   },{
     allow : [1,2,5],
     icon: 'supervisor_account',
@@ -48,12 +48,12 @@ exports = module.exports = [{
   title: 'Inventario',
   items: [{
     allow : [1,2,5],
-    icon: 'add',
+    icon: 'fiber_new',
     state: 'm.addActivo',
     title: 'Agregar'
   },{
     allow : [1,2,3,4,5],
-    icon: 'add',
+    icon: 'content_paste',
     state: 'm.adminActivo',
     title: 'Inventario general'
   },{
@@ -66,19 +66,22 @@ exports = module.exports = [{
     icon: 'settings_applications',
     state: 'm.configActivo',
     title: 'Configurar tipos de activos'
-  },{
-    allow : [1,2],
-    icon: 'assignment',
-    state: 'm.entrega',
-    title: 'Orden de entrega'
-  },{
-    allow : [1,2],
-    icon: 'assignment',
-    state: 'm.retiro',
-    title: 'Orden de retiro'
   }/*,{
     icon: 'description',
     state: 'm.hojaVida',
     title: 'Hoja de vida'
   }*/]
+},{
+  title : 'Ordenes',
+  items : [{
+    allow : [1,2],
+    icon: 'call_made',
+    state: 'm.entrega',
+    title: 'Orden de entrega'
+  },{
+    allow : [1,2],
+    icon: 'call_received',
+    state: 'm.retiro',
+    title: 'Orden de retiro'
+  }]
 }]

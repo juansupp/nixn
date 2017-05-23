@@ -71,7 +71,6 @@ export class hojaVidaComponent {
   retirar(ev) {
     //Primero se inserta la orden
     this.insertOrden().then(orden => {
-      console.log(orden)
       //Luego se recorre cada una de las sub_entregas (activo)
       this.activoshojaVida.forEach(activo => {
         //Se liga la sub_entrega con hojaVida null a la recien ingresada

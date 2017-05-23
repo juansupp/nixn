@@ -88,6 +88,16 @@ div(layout='row', layout-align='center center')
               wait-for-where='true'
               nx-data='$ctrl.nxData.area'
               frm="$ctrl.entregaFrm.area")
+            //Tipo de contrato 
+            nix-select(
+              flex
+              required='true'
+              name='tipoContrato'
+              label='Tipo de contrato'
+              ng-model='$ctrl.model.tipoContrato'
+              wait-for-where='true'
+              nx-data='$ctrl.nxData.tipoContrato'
+              frm="$ctrl.entregaFrm.tipoContrato")
           md-card
             md-list
               div(layout='row')
@@ -101,18 +111,6 @@ div(layout='row', layout-align='center center')
                       | Activo {{activo.serial}}
                   h4 {{activo.cliente_nombre}}
                     | {{activo._marca + ' - ' + activo._modelo }}
-                  //Correo
-                  md-input-container.md-secondary.fix-size
-                    label Correo
-                    input(type='text' ng-model='activo.contacto.correo')
-                  //Contacto
-                  nix-auto.md-secondary.fix-size(
-                    wait-for-where='true'
-                    label='Contacto'
-                    nx-text = '' 
-                    ng-model='activo.contacto._contacto'
-                    nx-data='$ctrl.nxData.contacto'
-                  )
                   md-icon.md-secondary.md-primary(
                     aria-label='orden'
                     style='cursor:pointer'
@@ -123,8 +121,9 @@ div(layout='row', layout-align='center center')
                     aria-label='observaciones'
                     style='cursor:pointer'
                     md-font-library="material-icons"
-                    ng-click='$ctrl.observacion(activo)') create 
-                    md-tooltip Observaciones
+                    ng-click='$ctrl.showAttach(ev,activo)'
+                    ng-disabled='!$ctrl.model.area') attach_file 
+                    md-tooltip Adjuntar usuario
                 md-divider
           br
           md-button.md-primary.md-rised( type='submit' ) Registrar entrega

@@ -76,7 +76,6 @@ export class adminActivoComponent {
       this.$bi.activo('full_activo')
         .paginate(filter,page-1,50)
         .then(response => {
-          console.log(response.data);
         //this.tickets = _.sortBy(response.data, 'N_Ticket').reverse();
         this.activos = response.data;
       });

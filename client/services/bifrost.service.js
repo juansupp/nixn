@@ -21,7 +21,6 @@ export function bifrostService($http, $hummer) {
         where: where,
         entity: entity
       };
-      console.log(dataObject)
     return $http.post(url + '/delete', dataObject);
   }
 

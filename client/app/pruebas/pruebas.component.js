@@ -17,7 +17,7 @@ export class PruebasComponent {
 
   change(){
 
-    console.log(this.model.marca)
+    
     /*this.nxData.modelo.w = {
       fk_id_marca  : this.marca
     };*/

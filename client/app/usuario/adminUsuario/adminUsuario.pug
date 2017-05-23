@@ -12,16 +12,13 @@ div(layout='row', layout-align='center center')
                 tr(md-row='')
                   th(md-column) Usuario
                   th(md-column) Correo
-                  th(md-column) Rol
-                  th(md-column) Rol
-                  th(md-column) Rol
+                  th(md-column) Telefono
                   th(md-column) Rol
               tbody(md-body='')
                 tr(md-row='', md-select='usuario', md-select-id='usuario.id_usuario', md-auto-select='', dir-paginate='usuario in $ctrl.usuarios | itemsPerPage: 2'  total-items='$ctrl.totalUsuarios' current-page="$ctrl.current")
                   td(md-cell='') {{usuario.nombre + usuario.apellido}}
                   td(md-cell='') {{usuario.correo}}
-                  td(md-cell='') {{usuario.correo}}
-                  td(md-cell='') {{usuario.correo}}
-                  td(md-cell='') {{usuario.correo}}
-                  td(md-cell='') {{usuario.correo}}
+                  td(md-cell='') {{usuario.telefono}}
+                  td(md-cell='') {{usuario._rol}}
+                  
             dir-pagination-controls(flex align='center' on-page-change="$ctrl.allUsers({'1':'1'},newPageNumber)")

@@ -27,7 +27,7 @@ export class AdminTicketComponent {
       filter["tipo"] = 'II';
     if(this.$cookieStore.get('user').id_rol == 3)
       filter['tecnico']   = this.$cookieStore.get('user').id_usuario
-    console.log(filter);
+    
     this.currenTotal(filter);
     this.$bi.ticket('full_ticket')
       .paginate(filter,page-1,10)

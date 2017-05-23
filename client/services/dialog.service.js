@@ -29,6 +29,12 @@ export function dialogService($mdDialog) {
     }
     return $mdDialog.show(customObj);
   }
+
+  function hide(param=''){
+    $mdDialog.hide(param);
+  }
+
+  this.hide = hide;
   this.custom = custom;
   this.confirm = confirm;
 }

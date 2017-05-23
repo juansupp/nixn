@@ -37,10 +37,12 @@ export class perfilComponent {
         correo : this.model.correo,
         fk_id_rol : this.model.fk_id_rol,
         pass : this.model.pass
+      }, whereObj = {
+        id_usuario : this.$cookieStore.get('user').id_usuario
       };
 
       return this.$bi.usuario()
-        .update(updateObj);
+        .update(updateObj,whereObj);
     } else {
       this.$pop.show('Credenciales incorrectas');
     }

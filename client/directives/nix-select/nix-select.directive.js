@@ -30,7 +30,6 @@ function nixSelect ($bi) {
 
     //Cada vez que en el controlador invocado se modifique la variable
     scope.$watch('nxData', data =>{
-      console.log(scope.waitForWhere);
       if(data){
         if(scope.waitForWhere){
           if(data.w){

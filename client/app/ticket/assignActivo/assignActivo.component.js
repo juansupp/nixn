@@ -33,10 +33,11 @@ export class AssignActivoComponent {
   }
 
   assignActivo(ticket,event){
-    console.log(ticket)
+
     this.confirmAssign(ticket,event).then(()=>{
       this.actualizarTicket(ticket).then(()=>{
-        console.log('end');
+        this.$pop.show('Activo asignado a ticket satisfactoriamente');
+        this.filterByRol();
       });
     })
   }

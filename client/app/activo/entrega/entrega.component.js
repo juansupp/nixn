@@ -5,13 +5,14 @@ import routes from './entrega.routes';
 
 export class entregaComponent {
   /*@ngInject*/
-  constructor($bi,$scope,$select,$pop,$dialog,$nxData) {
+  constructor($bi,$scope,$select,$pop,$dialog,$nxData,$q) {
     this.$scope = $scope;
     this.$bi = $bi;
     this.$select = $select;
     this.$pop = $pop;
     this.$dialog = $dialog;
     this.nxData = $nxData;
+    this.$q = $q;
   }
 
   buscarActivos(){
@@ -69,6 +70,7 @@ export class entregaComponent {
   }
   //!!!!Nucleo nix
   entregar (ev) {
+    this.police();
     //Primero se inserta la orden
     this.insertOrden().then(orden => {
       //Luego se recorre cada una de las sub_entregas (activo)
@@ -81,6 +83,43 @@ export class entregaComponent {
       this.$pop.show('Entrega registrada satisfactoriamente');
     });
   }
+
+  showAttach(ev,activo) {
+    //Globaliza el activo para usarlo en contactos
+    this.activo = activo;
+    let
+      ac = activo,
+      dialogAttach =
+        this.$dialog.custom(ev,() => this, require('./attachContacto.pug'));
+
+    dialogAttach.then(attach => {
+
+      activo["contacto"] = attach[0];
+      activo["notas"] = attach[1];
+      this.$pop.show('Usuario adjuntando satisfactoriamente');
+    });
+  }
+
+  getContacto(){
+    if(!this.attach.idContacto) {
+      return this.$bi.contacto()
+         .insert([this.attach.contacto,this.attach.correo,this.model.area])
+         .then(response => response.data[0].id_contacto);
+    } else {
+       let deferred = this.$q.defer();
+       deferred.resolve( this.attach.idContacto)
+       return deferred.promise;
+     }
+  }
+
+  adjuntarContacto() {
+    //Inserta o devuelve el contacto seleccionado
+    this.getContacto().then(idContacto => {
+      //Pasamos el contacto por parametro callback a showAttach
+      this.$dialog.hide([idContacto,this.attach.notas])
+    })
+  }
+
 
   loadAreas () {
     //Esperamos la digestión de angular
@@ -107,7 +146,7 @@ export class entregaComponent {
     let agent = false;
     //Recorremos cada uno de los activos
     this.activosEntrega.forEach(activo => {
-      // SI no hay contacto adjunto al activo el agente lo retornará 
+      // SI no hay contacto adjunto al activo el agente lo retornará
       if(!activo.contacto) agent  = true;
     });
     return agent;

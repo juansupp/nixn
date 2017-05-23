@@ -195,8 +195,8 @@ export class DocumTicketCmponent {
       this.cargarTecnicos();
 
     //
-    let url = 'http://picasaweb.google.com/data/entry/api/user/micorreo@gmail.com?alt=json';
-    this.$http.get(url).then(response => this.image = response.data.entry.gphoto$thumbnail.$t).catch(err => console.log(err))
+    //let url = 'http://picasaweb.google.com/data/entry/api/user/micorreo@gmail.com?alt=json';
+    //this.$http.get(url).then(response => this.image = response.data.entry.gphoto$thumbnail.$t).catch(err => console.log(err))
     // data => entry => gphoto$thumbnail ==> $t
    // this.features = require('./docum.struct')
   }

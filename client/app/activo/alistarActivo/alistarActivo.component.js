@@ -39,7 +39,6 @@ export class AlistarActivoComponent {
         inventario :value,
         seguridad : value,
       };
-      console.log(this.filter)
       this.allActivos(this.filter,this.current);
     }
   }

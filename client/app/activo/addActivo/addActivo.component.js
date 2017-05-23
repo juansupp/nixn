@@ -32,7 +32,6 @@ export class AddActivoComponent {
   selectTipoActivo(){
     //ESPERA POR el la digestión en proceso
     _.defer(()=>{
-      console.log(this.model.tipoActivo);
       //Por defecto se resetea la vista de las caracteristicas
       this.showCar = false;
       //Se resetean las caracteristicas
@@ -40,7 +39,6 @@ export class AddActivoComponent {
       //Cargamos las caracteristicas del tipo de activo seleccionado
       this.loadCaracteristicas(this.model.tipoActivo)
         .then(response => {
-          console.log(response)
           //En caso que hayan caracteristicas
           if(response.data.length > 0){
             //Se muestra el campo de las caracteristicas
@@ -125,7 +123,7 @@ export class AddActivoComponent {
   getMarca () {
    if(!this.model.marca)
     return this.$bi.marca().insert([this.text.marca])
-      .then(response => { console.log("RES : " ,response); return response.data[0].id_marca});
+      .then(response => {  return response.data[0].id_marca});
     else{
       let deferred = this.$q.defer();
       deferred.resolve( this.model.marca.value )

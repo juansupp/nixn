@@ -27,7 +27,6 @@ export class LoginComponent {
       if (!data.length)
         this.$pop.show(`Credenciales incorrectas`)
       else {
-        console.log(data);
         this.$cookieStore.put('user', data[0]);
         this.$state.go(`m.${data[0]._rol}`)
         //this.$state.go(`m.${data[0].rol}`)

@@ -43,7 +43,6 @@ export class configActivoComponent {
     this.$dialog
     .confirm(ev,'Confirmación','¿Está seguro que desea registrar el tipo de activo?')
     .then( (e) => {
-      console.log(e)
       //Inserta el tipo de activo primero
       this.insertTipo(this.model.tipo,this.model.descripcion)
         .then(response=>{

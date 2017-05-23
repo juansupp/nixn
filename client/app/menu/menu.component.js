@@ -15,10 +15,8 @@ export class MenuComponent {
 
   allowItems(){
     let rol = this.$cookieStore.get('user');
-    //console.log(this.structMenu);
     this.structMenu.forEach(menu => {
       menu.items.forEach(item =>  {
-        //console.log(item.allow,rol.id_rol)
         if( item.allow.includes(rol.id_rol) ) item.show = true;
         else item.show = false;
       })

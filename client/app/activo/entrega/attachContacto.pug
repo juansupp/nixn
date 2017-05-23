@@ -1,0 +1,32 @@
+md-dialog()
+  form(name='attachFrm' ng-submit='$ctrl.adjuntarContacto()')
+    md-dialog-content(layout-padding  )
+      nix-auto.md-secondary.fix-size(
+        flex
+        wait-for-where='true'
+        label='Selecciona el usuario a ligar'
+        nx-text='$ctrl.attach.contacto' 
+        ng-model='$ctrl.attach.idContacto'
+        nx-data='$ctrl.nxData.contacto'
+        name='contacto'
+        required='true'
+        frm='attachFrm.contacto'
+      )
+      //Correo
+      nix-text(
+        flex
+        type='email'
+        label ='Correo usuario'
+        ng-model='$ctrl.attach.correo'
+        name='correo'
+        ng-disabled='$ctrl.attach.idContacto'
+        frm='attachFrm.correo'
+        required='true'
+      )
+      //NOTAS
+      nix-text-area(
+        flex
+        label='Observaciones'
+        ng-model='$ctrl.attach.notas'
+      )
+      md-button.md-primary(flex type='submit') Adjuntar usuario a activo

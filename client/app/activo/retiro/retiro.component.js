@@ -17,7 +17,6 @@ export class retiroComponent {
   transformChip(chip) {
     // If it is an object, it's already a known chip
     if (angular.isObject(chip)) {
-      console.log(chip)
       return chip;
     }
     // Otherwise, create a new one
@@ -81,7 +80,6 @@ export class retiroComponent {
   retirar(ev) {
     //Primero se inserta la orden
     this.insertOrden().then(orden => {
-      console.log(orden)
       //Luego se recorre cada una de las sub_entregas (activo)
       this.activosretiro.forEach(activo => {
         //Se liga la sub_entrega con retiro null a la recien ingresada
