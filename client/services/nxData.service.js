@@ -20,6 +20,7 @@ export function nxDataService() {
 	this.tipoActivo = constructNxData('tipo_activo','id_tipo_activo','_tipo_activo');
 	this.servicio = constructNxData('servicio','id_servicio','_servicio');
 	this.tecnico = constructNxData('full_usuario','id_usuario','_usuario',{_rol: 'Tech' });
+	this.usuario = constructNxData('full_usuario','id_usuario','_usuario');
 	this.origen = constructNxData('origen','id_origen','_origen');
 	this.cliente = constructNxData('full_cliente','id_cliente','_cliente');
 	this.contacto = constructNxData('contacto','id_contacto','_contacto');
