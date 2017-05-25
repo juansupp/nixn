@@ -29,20 +29,24 @@ export class perfilComponent {
 
 
   updateUser() {
-    if(this.model.pass === this.model._pass) {
+    if((this.model.pass === this.model._pass) && this.model.pass !== '') {
       let updateObj = {
         apellido : this.model.apellido,
         nombre : this.model.nombre,
         telefono : this.model.telefono,
         correo : this.model.correo,
-        fk_id_rol : this.model.fk_id_rol,
+        //fk_id_rol : this.model.fk_id_rol,
         pass : this.model.pass
       }, whereObj = {
         id_usuario : this.$cookieStore.get('user').id_usuario
       };
 
       return this.$bi.usuario()
-        .update(updateObj,whereObj);
+        .update(updateObj,whereObj)
+        .then(() => {
+          this.$pop.show('Usuario actualizado satisfactoriamente');
+          this.model = new Object();
+        });
     } else {
       this.$pop.show('Credenciales incorrectas');
     }

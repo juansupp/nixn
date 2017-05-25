@@ -115,8 +115,15 @@ export class AddTicketComponent {
 
   }
 
+  end(){
+    this.$pop.show('Ticket Registrado satisfactoriamente')
+    this.model = new Object();
+    this.btnDisabled = false;
+  }
+
   nuevoTicket(ev,frm) {
     if(this.policeActivo()){
+      this.btnDisabled = true;
       this.getLastTicket().then(lastTicket => {
         //
         //Titlo del cuadro de confirmacion
@@ -129,8 +136,8 @@ export class AddTicketComponent {
             this.insertTicket(lastTicket,servicio).then(ticket => {
               this.insertDocumentacion(ticket).then(documentacion=>{
                 this.insertImagen(documentacion)
-                  .then(response =>
-                    this.$pop.show('Ticket Registrado satisfactoriamente')
+                  .then(() =>
+                    this.end();
                   )
               })
             })
