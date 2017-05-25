@@ -13,7 +13,7 @@ exports = module.exports = [{
     state: 'm.adminTicket',
     title: 'Administrar'
   },{
-    allow : [1,2,3],
+    allow : [1,2,3,5],
     icon: 'spellcheck',
     state: 'm.assignActivo',
     title: 'Asignar activo'
