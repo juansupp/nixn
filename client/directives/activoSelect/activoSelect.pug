@@ -1,0 +1,48 @@
+md-card
+  md-list
+    div(layout='row')
+      md-subheader(flex).md-no-sticky 
+        | Lista de activos del cliente {{cliente}} en el area {{area}}
+    div(layout='column')
+      nix-cliente(
+        layout-padding
+        full='false',
+        ng-model='model.area'
+      )
+    md-list-item.secondary-button-padding.md-3-line(
+      dir-paginate='activo in activos | itemsPerPage: 10'
+      total-items='totalActivos'
+      current-page="current")
+      //-md-icon(md-font-library="material-icons"  ng-class='activo.estado') {{activo.icon}}
+      .md-list-item-text(layout='column')
+        h3
+          strong
+            | Activo {{activo.serial}}
+        h4 {{activo.cliente_nombre}}
+          | {{activo._marca + ' - ' + activo._modelo }}
+        p  {{activo.inventario}} / {{activo.seguridad}}
+        //-md-button.md-icon-button.md-primary.md-secondary()
+          md-icon.md-primary(
+            aria-label='actione'
+            md-font-library="material-icons"
+            ng-disabled='action.disabled') face
+        md-button.md-icon-button.md-primary.md-secondary(
+          ng-repeat='action in actionStruct' 
+          ng-click='action.play($event,activo)')
+          md-icon(
+            aria-label='actione'
+            md-font-library="material-icons"
+            ng-disabled='action.disabled') {{action.icon}}
+            md-tooltip {{action.toolTip}}
+      md-divider
+    div(layout-padding layout='row')
+      nix-text(
+        flex='80'
+        label='Buscar'
+        ng-model='buscar')
+      md-button.md-primary( flex ng-click='buscarActivos()')  Buscar
+  div(layout='row' flex layout-align='center center')
+    dir-pagination-controls(
+      flex
+      align='center'
+      on-page-change="allActivos(newPageNumber)")

@@ -1,0 +1,18 @@
+{
+  "apps": [
+
+    {
+      "name": "nix",
+      "script": "dist/server/index.js",
+      "env_production": {
+        "NODE_ENV": "production",
+        "PORT": "8080"
+      },
+      "args": ["--release"],
+      "port": "8080",
+      "watch": false
+    }
+
+  ]
+
+}

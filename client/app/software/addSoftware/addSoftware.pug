@@ -1,0 +1,34 @@
+div(layout='row' layout-align='center center')
+  md-content(layout-padding )
+    md-card-title
+        md-card-title-text
+          span.md-headline Gestión desoftware
+          p.md-body-1
+            |  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, iure, molestias. Deleniti, totam, saepe. Harum, quis deserunt dolores reiciendis ab dolorum non rerum, accusantium, nesciunt laborum illo esse hic quaerat!
+    //-nix-title(
+      flex
+      title='Gestión de software'
+      text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus consequatur architecto temporibus magnam officia esse magni ut consequuntur eius fugiat id, atque voluptatum quibusdam eaque, incidunt? Voluptates quod necessitatibus eos!')
+    md-content(layout='row')
+      form(name='$ctrl.softFrm' ng-submit='$ctrl._addSoftware()' ) 
+        nix-text(
+          ng-model='$ctrl.model._software'
+          flex
+          required='true'
+          label='Software'
+          name='software'
+          frm='$ctrl.softFrm.software'
+        )
+        nix-text-area(
+          ng-model='$ctrl.model.descripcion'
+          flex
+          required='false'
+          label='Observaciones'
+          name='observaciones'
+          frm='$ctrl.softFrm.observaciones'
+        )
+        md-button(
+          type='submit' 
+        ).md-primary Registrar
+    md-content(layout='row' flex)
+   

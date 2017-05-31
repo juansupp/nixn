@@ -10,7 +10,23 @@ export function timeService(moment) {
   function time(_time,format='HH:mm:ss') {
     return moment.utc(_time).format(format);
   }
+  function humanizar(loopData, _fecha = 'fecha', _hora = 'hora') {
+    //
+    loopData.forEach(item => {
+      //
+      let fecha = item[_fecha];
+      //
+      let hora = item[_hora];
 
+      item[_fecha] = date(fecha, 'LL', 1);
+      item[_hora] = time(hora);
+    });
+
+    return loopData;
+  }
+
+
+  this.humanizar = humanizar;
   this.date = date;
   this.time = time;
 }

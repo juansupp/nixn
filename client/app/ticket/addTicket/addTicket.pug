@@ -7,6 +7,21 @@ div(layout='row', layout-align='center center')
           | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ducimus quas alias iusto, voluptas esse, aspernatur nobis reprehenderit! Provident, error eaque veniam maxime optio in dolorem sequi quaerat voluptate quae.
     form(name='$ctrl.ticketForm', ng-submit='$ctrl.nuevoTicket($event,ticketForm)')
       div(layout='row' flex)
+        //-Cliente
+        nix-select(
+          flex
+          label='Cliente'
+          ng-change='$ctrl.loadAreas()'
+          ng-model='model.cliente'
+          nx-data='nxData.cliente')
+        //-Area
+        nix-select(
+          flex
+          label='Area'
+          wait-for-where='true'
+          ng-model='model.area'
+          nx-data='nxData.area')
+      div(layout='row' flex)
         //-Servicio
         nix-auto(
           flex

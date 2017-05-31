@@ -41,6 +41,11 @@ export class PruebasComponent {
     this.model = new Object();
     this.pru = new Object();
 
+    this.nxFrm = {
+      cliente: this.pru.cliente,
+      area: this.pru.area
+    }
+
   }
 }
 

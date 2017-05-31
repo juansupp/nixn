@@ -54,7 +54,7 @@ function nixAuto($bi,$select){
     }
 
     return {
-      template: require('./nix-auto.pug'),
+      template: require('./nixAuto.pug'),
       restrict: 'EA',
       require:"^ngModel",
       scope : {
@@ -74,7 +74,7 @@ function nixAuto($bi,$select){
     };
 }
 
-export default angular.module('nixApp.nix-auto', [])
+export default angular.module('nixApp.nixAuto', [])
   .directive('nixAuto', nixAuto)
   .name;
 

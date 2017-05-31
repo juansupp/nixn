@@ -6,7 +6,7 @@ function nixText(){
         if(!scope.type) scope.type = 'text';
     }
    return {
-        template: require('./nix-text.pug'),
+        template: require('./nixText.pug'),
         restrict: 'EA',
         require : 'ngModel',
         scope : {
@@ -25,6 +25,6 @@ function nixText(){
 
 
 
-export default angular.module('nixApp.nix-text', [])
+export default angular.module('nixApp.nixText', [])
   .directive('nixText', nixText)
   .name;

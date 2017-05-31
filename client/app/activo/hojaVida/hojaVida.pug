@@ -6,70 +6,25 @@ div(layout='row', layout-align='center center')
         p.md-body-1
           |  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, iure, molestias. Deleniti, totam, saepe. Harum, quis deserunt dolores reiciendis ab dolorum non rerum, accusantium, nesciunt laborum illo esse hic quaerat!
     md-content(layout='row')
-      md-card(flex='40')
-        md-list
-          div(layout='column')
-            md-subheader(flex).md-no-sticky Lista de activos del cliente X en el area Y
-            div(flex layout='row' layout-padding)
-              //-Cliente
-              nix-select(
-                flex
-                label='Cliente'
-                ng-change='$ctrl.loadContactos()'
-                ng-model='$ctrl.model.cliente'
-                nx-data='$ctrl.nxData.cliente')
-              //-Area
-              nix-select(
-                flex
-                label='Area'
-                ng-change='$ctrl.loadContactos()'
-                ng-model='$ctrl.model.area'
-                nx-data='$ctrl.nxData.area')
-          md-list-item.secondary-button-padding.md-3-line(
-            dir-paginate='activo in $ctrl.activosAlistados | itemsPerPage: 10'
-            total-items='$ctrl.totalActivos'
-            current-page="$ctrl.current")
-            //-md-icon(md-font-library="material-icons"  ng-class='activo.estado') {{activo.icon}}
-            .md-list-item-text(layout='column')
-              h3
-                strong
-                  | Activo {{activo.serial}}
-              h4 {{activo.cliente_nombre}}
-                | {{activo._marca + ' - ' + activo._modelo }}
-              p  {{activo.inventario}} / {{activo.seguridad}}
-              md-icon.md-secondary.md-primary(
-                aria-label='bum2'
-                style='cursor:pointer'
-                md-font-library="material-icons"
-                ng-disabled='activo.disabled'
-                ng-click='$ctrl.pasarOrden(activo)') trending_flat
-                md-tooltip Pasar a retiro
-            md-divider
-          div(layout-padding layout='row')
-            nix-text(
-              flex='80'
-              label='Buscar'
-              ng-model='$ctrl.buscar')
-            md-button.md-primary( flex ng-click='$ctrl.buscarActivos()')  Buscar
-        div(layout='row' flex layout-align='center center')
-          dir-pagination-controls(
-            flex
-            align='center'
-            on-page-change="$ctrl.allActivos($ctrl.filter,newPageNumber)")
+      activo-select(
+        flex='40'
+        filters=''
+        action-struct='$ctrl.actionStruct'
+        entity ='full_activo'
+      )
       md-content(flex )
         md-card
           md-list
             div(layout='row')
-              md-subheader(flex).md-no-sticky Lista de activos para retirar
+              md-subheader(flex).md-no-sticky Historial del activo tal
             md-list-item.secondary-button-padding.md-3-line(
-              ng-repeat='activo in $ctrl.activosretiro')
+              ng-repeat='fila in $ctrl.historial')
               //-md-icon(md-font-library="material-icons"  ng-class='activo.estado') {{activo.icon}}
               .md-list-item-text(layout='column')
                 h3
-                  strong
-                    | Activo {{activo.serial}}
-                h4 {{activo.cliente_nombre}}
-                  | {{activo._marca + ' - ' + activo._modelo }}
+                  strong {{fila.texto}}
+                h4 Llave: {{fila.key}}
+                p {{fila.fecha + ' ' + fila.hora }}
                 md-icon.md-secondary.md-primary(
                   aria-label='bum2'
                   md-font-library="material-icons"
@@ -83,21 +38,3 @@ div(layout='row', layout-align='center center')
                   ng-click='$ctrl.pasarOrden(activo,true)') clear 
                   md-tooltip Eliminar
               md-divider
-          br
-          form(
-            name='$ctrl.retiroFrm' 
-            ng-submit='$ctrl.retirar($event)' 
-            layout='row'
-            layout-padding
-            layout-align="space-between center")
-            nix-text(
-              flex
-              required='true'
-              label='Numero de orden'
-              ng-model='$ctrl.model.nOrden'
-              name='nOrden'
-              frm="$ctrl.retiroFrm.nOrden")
-            span(flex)
-            md-button.md-primary.md-rised(flex type='submit' ) Registrar retiro
-      
-      

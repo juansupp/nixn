@@ -2,17 +2,16 @@
 const angular = require('angular');
 /*@ngInject*/
 export function bifrostService($http, $hummer) {
-  let
-    url = '/api/astral',
-    entity = '',
-    methods = {
-      find: find,
-      insert: insert,
-      all: all,
-      update : update,
-      paginate : paginate,
-      delete : _delete
-    };
+  let url = '/api/astral';
+  let entity = '';
+  let methods = {
+    find: find,
+    insert: insert,
+    all: all,
+    update: update,
+    paginate: paginate,
+    delete: _delete
+  };
   /*ACTIONS*/
   function _delete (whereObj) {
     let
@@ -214,17 +213,23 @@ export function bifrostService($http, $hummer) {
     return methods;
   }
 
+  function hojaVida(_entity='hoja_vida'){
+    entity = _entity;
+    return methods;
+  }
+
+  this.hojaVida = hojaVida;
   this.entrega = entrega;
   this.contacto = contacto;
   this.subEntrega = subEntrega;
   this.licencia = licencia;
   this.carActivo = carActivo;
   this.software = software;
-  this.base =  base;
+  this.base = base;
   this.carActivo = carActivo;
   this.carValor = carValor;
   this.car = car;
-  this.tipoActivo = tipoActivo
+  this.tipoActivo = tipoActivo;
   this.encuesta = encuesta;
   this.respuesta = respuesta;
   this.pregunta = pregunta;

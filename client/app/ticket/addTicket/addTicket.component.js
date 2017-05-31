@@ -2,6 +2,7 @@
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
 
+
 import routes from './addTicket.routes';
 
 export class AddTicketComponent {
@@ -53,13 +54,14 @@ export class AddTicketComponent {
       //Se acorta la variable
       idCreador = (this.$cookieStore.get('user')).id_usuario,
       objTicket = {
-        N_Ticket : nTicket,
-        estado: "F", // Estado F = pendiente por activo
-        cierre : 'X', // Cierre X no se ha cerrado
-        fk_id_tecnico : this.model.tecnico,
-        fk_id_creador : idCreador,
-        fk_id_servicio : fkServicio,
-        fk_id_origen : this.model.origen
+        N_Ticket: nTicket,
+        estado: 'F', // Estado F = pendiente por activo
+        cierre: 'X', // Cierre X no se ha cerrado
+        fk_id_tecnico: this.model.tecnico,
+        fk_id_creador: idCreador,
+        fk_id_servicio: fkServicio,
+        fk_id_origen: this.model.origen,
+        fk_id_contacto: this.model.contacto
       };
 
     return this.$bi.ticket().insert(objTicket,true)
@@ -136,9 +138,7 @@ export class AddTicketComponent {
             this.insertTicket(lastTicket,servicio).then(ticket => {
               this.insertDocumentacion(ticket).then(documentacion=>{
                 this.insertImagen(documentacion)
-                  .then(() =>
-                    this.end();
-                  )
+                  .then(() => this.end());
               })
             })
           });
@@ -159,11 +159,14 @@ export class AddTicketComponent {
   }
 }
 
-export default angular.module('nixApp.addTicket', [uiRouter]).config(routes).component('addTicket', {
-  template: require('./addTicket.pug'),
-  controller: AddTicketComponent
-}).name;
-/*this.$upload.upload({
+export default angular
+  .module('nixApp.addTicket', [uiRouter])
+  .config(routes)
+  .component('addTicket', {
+    template: require('./addTicket.pug'),
+    controller: AddTicketComponent
+  }).name;
+  /*this.$upload.upload({
     url: 'api/astral/imagen',
     method: 'POST',
     //data: data, // Any data needed to be submitted along with the files

@@ -1,12 +1,12 @@
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
-const _ = require("lodash");
+const _ = require('lodash');
 import routes from './addActivo.routes';
 
 export class AddActivoComponent {
   /*@ngInject*/
-  constructor($select, $bi, $hummer, $pop,$q,$nxData,$scope,$dialog) {
+  constructor($select, $bi, $hummer, $pop, $q, $nxData, $scope, $dialog) {
     this.$select = $select;
     this.$bi = $bi;
     this.$hummer = $hummer;
@@ -20,22 +20,22 @@ export class AddActivoComponent {
   loadCaracteristicas(idTipo) {
     return this.$bi
       .car()
-      .all({fk_id_tipo_activo : idTipo});
+      .all({fk_id_tipo_activo: idTipo});
   }
 
   loadCaracteristicaValores(idCar) {
     return this.$bi
       .carValor()
-      .all({fk_id_caracteristica : idCar});
+      .all({fk_id_caracteristica: idCar});
   }
 
-  selectTipoActivo(){
+  selectTipoActivo() {
     //ESPERA POR el la digestión en proceso
-    _.defer(()=>{
+    _.defer(() => {
       //Por defecto se resetea la vista de las caracteristicas
       this.showCar = false;
       //Se resetean las caracteristicas
-      this.caracteristicas = new Array();
+      this.caracteristicas = [];
       //Cargamos las caracteristicas del tipo de activo seleccionado
       this.loadCaracteristicas(this.model.tipoActivo)
         .then(response => {
@@ -44,9 +44,8 @@ export class AddActivoComponent {
             //Se muestra el campo de las caracteristicas
             this.showCar = true;
             //Variables de acorte proximo
-            let
-              caracteristicas  = new Array(),
-              valores = new Array();
+            let caracteristicas = [];
+            let valores = [];
             //Acorte de variable
             caracteristicas = response.data;
             //Por cada caracteristica del tipo  de activo
@@ -59,12 +58,12 @@ export class AddActivoComponent {
                   valores = responseV.data;
                   //Se crea variable temporal obj para agregar al array
                   let obj = {
-                    selected : '', // => hace referencia al ngModel
-                    values : valores, //=> Se guardan los valores de la caracteristica
-                    _caracteristica : c._caracteristica // Referencia para el placeholder
-                  }
+                    selected: '', // => hace referencia al ngModel
+                    values: valores, //=> Se guardan los valores de la caracteristica
+                    _caracteristica: c._caracteristica // Referencia para el placeholder
+                  };
                   //Finalmente se agregan la caracteristica
-                  this.caracteristicas.push(obj)
+                  this.caracteristicas.push(obj);
                 });
             });
           }
@@ -77,13 +76,13 @@ export class AddActivoComponent {
     Carga modelo.
     Se hace uso de temporizador defer para esperar a que acabe la digestión y poder aplicar los cambios del modelo de la directiva ya que se ejecuta prmero este metodo antes que se aplique el cambio al ngModel inicial
      */
-    _.defer( () => {
+    _.defer(() => {
       //Se aplican los cambios para ver los modelos actuales
       this.$scope.$apply();
       //En caso que se haya seleccionado mas no borrado alguna letra
-      if(this.model.marca){
+      if(this.model.marca) {
         //Se hace la modificacion al nxData para modelo
-        this.nxData.modelo.w = {fk_id_marca : this.model.marca.value};
+        this.nxData.modelo.w = {fk_id_marca: this.model.marca.value};
         //Se resetea la variable modelo para evitar problemas
         this.model.modelo = '';
         //Se habilita la seleccion de modelo
@@ -159,10 +158,10 @@ export class AddActivoComponent {
   }
 
   nuevoActivo(ev) {
-    this.$dialog.confirm(ev,'Confirmación','¿Seguro que desea registrar el activo?')
+    this.$dialog.confirm(ev, 'Confirmación', '¿Seguro que desea registrar el activo?')
       .then(() => {
           //Se valida que los input de caracteristicas sean validos
-        if(this.validateCarValues()){
+        if(this.validateCarValues()) {
           //Desabilitamos en botón de registro para evitar duplicidad
           this.disabled.submit = true;
           this.getMarca().then(rMarca => {
@@ -173,29 +172,26 @@ export class AddActivoComponent {
                 this.getCaracteristicaValor(rActivo);
                 //
                 this.$pop.show('Activo registro Satisfactoriamente')
-              })
-            })
-          })
-        }else {
+              });
+            });
+          });
+        } else {
           this.$pop.show('Debes seleccionar las especificaciones del activo');
         }
       });
-
   }
-
-
 
   $onInit() {
     //Se instancia el repetidor de caracteristicas
-    this.caracteristicas = new Array();
+    this.caracteristicas = [];
     //Por defecto no se muestran las caracteristicas hasta seleccionar un tipo de activo
     this.showCar = false;
     //Modelo del controlador
-    this.model  = new Object();
+    this.model = {};
     //Se activa el botón de submit por defecto
-    this.disabled  = {
-      submit : false,
-      modelo : true
+    this.disabled = {
+      submit: false,
+      modelo: true
     };
   }
 }

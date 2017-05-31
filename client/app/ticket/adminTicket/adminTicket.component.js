@@ -75,7 +75,7 @@ export class AdminTicketComponent {
     //Modelo
     this.model = new Object();
     //Tecnicos
-    this.$bi.usuario('full_usuario').all({_rol:'Tech'})
+    this.$bi.usuario('full_usuario').all()
       .then(response => this.tecnicos = response.data);
     //SERVICIOS
     this.$bi.servicio().all()

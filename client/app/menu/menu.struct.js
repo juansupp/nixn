@@ -66,11 +66,12 @@ exports = module.exports = [{
     icon: 'settings_applications',
     state: 'm.configActivo',
     title: 'Configurar tipos de activos'
-  }/*,{
+  },{
+    allow : [1,2,3,4,5],
     icon: 'description',
     state: 'm.hojaVida',
-    title: 'Hoja de vida'
-  }*/]
+    title: 'Historial de sucesos'
+  }]
 },{
   title : 'Ordenes',
   items : [{
@@ -83,5 +84,13 @@ exports = module.exports = [{
     icon: 'call_received',
     state: 'm.retiro',
     title: 'Orden de retiro'
+  }]
+},{
+  title: 'Licencias',
+  items: [{
+    allow: [1,2,3,4,5],
+    icon: 'fiber_new',
+    state: 'm.addSoftware',
+    title: 'Agergar software'
   }]
 }]

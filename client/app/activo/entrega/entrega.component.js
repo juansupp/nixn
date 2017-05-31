@@ -5,7 +5,7 @@ import routes from './entrega.routes';
 
 export class entregaComponent {
   /*@ngInject*/
-  constructor($bi,$scope,$select,$pop,$dialog,$nxData,$q) {
+  constructor($bi, $scope, $select, $pop, $dialog, $nxData, $q) {
     this.$scope = $scope;
     this.$bi = $bi;
     this.$select = $select;
@@ -15,29 +15,29 @@ export class entregaComponent {
     this.$q = $q;
   }
 
-  buscarActivos(){
+  buscarActivos() {
     let value = `'%${this.buscar}%'`;
     if(this.buscar.length >= 4) {
       this.filter = {
-        _marca : value,
-        _modelo  :value,
-        _tipo_activo :value,
-        serial : value,
-        inventario :value,
-        seguridad : value,
+        _marca: value,
+        _modelo: value,
+        _tipo_activo: value,
+        serial: value,
+        inventario: value,
+        seguridad: value,
       };
-      this.allActivos(this.filter,this.current);
+      this.allActivos(this.filter, this.current);
     }
   }
 
-  currenTotal (filter) {
+  currenTotal(filter) {
     //Se consulta sub entrega para traer las sub entregas ligadas
     this.$bi.activo('full_sub_entrega')
-      .find(['count(id_activo) total'],filter)
+      .find(['count(id_activo) total'], filter)
       .then(response => this.totalActivos = response.data[0].total);
   }
 
-  allActivos(filter,page) {
+  allActivos(filter, page) {
     this.currenTotal(filter);
     this.$bi.activo('full_sub_entrega')
       .paginate(filter,page-1,10)

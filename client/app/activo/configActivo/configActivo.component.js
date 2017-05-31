@@ -3,34 +3,34 @@ const angular = require('angular');
 //const uiRouter = require('angular-ui-route');
 
 
-import route from './configActivo.route'
+import route from './configActivo.route';
 
 export class configActivoComponent {
   /*@ngInject*/
-  constructor($bi,$q,$dialog,$pop) {
+  constructor($bi, $q, $dialog, $pop) {
     this.$bi = $bi;
     this.$q = $q;
     this.$dialog = $dialog;
     this.$pop = $pop;
   }
 
-  insertTipo(tipo,descripcion){
-    let arrVal = [tipo,descripcion];
-    return this.$bi.tipoActivo().insert(arrVal)
+  insertTipo(tipo, descripcion) {
+    let arrVal = [tipo, descripcion];
+    return this.$bi.tipoActivo().insert(arrVal);
   }
 
-  insertCar(esp,idTipoActivo){
-    let arrVal = [esp,idTipoActivo];
-    return this.$bi.car().insert(arrVal)
+  insertCar(esp, idTipoActivo) {
+    let arrVal = [esp, idTipoActivo];
+    return this.$bi.car().insert(arrVal);
   }
 
-  insertCarValor(valor,idCar){
-    let arrVal = [valor,idCar];
-    return this.$bi.carValor().insert(arrVal)
+  insertCarValor(valor, idCar) {
+    let arrVal = [valor, idCar];
+    return this.$bi.carValor().insert(arrVal);
   }
 
   // all-one by update
-  loadTipoActivoOnce(where){
+  loadTipoActivoOnce(where) {
     return this.$bi.tipo_activo().find(where);
   }
   /*loadTipoActivoAll(where){
@@ -39,13 +39,13 @@ export class configActivoComponent {
 
   /* Faltan las validaciones */
 
-  addTipo (ev) {
+  addTipo(ev) {
     this.$dialog
-    .confirm(ev,'Confirmación','¿Está seguro que desea registrar el tipo de activo?')
-    .then( (e) => {
+    .confirm(ev,'Confirmación', '¿Está seguro que desea registrar el tipo de activo?')
+    .then(() => {
       //Inserta el tipo de activo primero
-      this.insertTipo(this.model.tipo,this.model.descripcion)
-        .then(response=>{
+      this.insertTipo(this.model.tipo, this.model.descripcion)
+        .then(response => {
           let
             //Declara acortado de respuesta para id_tipo
             idTipo = response.data[0].id_tipo_activo,

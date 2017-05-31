@@ -45,7 +45,7 @@ function nixSelect ($bi) {
 
   }
     return {
-      template: require('./nix-select.pug'),
+      template: require('./nixSelect.pug'),
       restrict: 'EA',
       require : 'ngModel',
       scope : {
@@ -65,6 +65,6 @@ function nixSelect ($bi) {
 }
 
 
-export default angular.module('nixApp.nix-select', [])
+export default angular.module('nixApp.nixSelect', [])
   .directive('nixSelect', nixSelect)
   .name;

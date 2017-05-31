@@ -59,37 +59,42 @@ import pruebas from './pruebas/pruebas.component';
 import alistarActivo from './activo/alistarActivo/alistarActivo.component';
 import assignActivo from './ticket/assignActivo/assignActivo.component';
 import adminActivo from './activo/adminActivo/adminActivo.component';
-import perfil from './perfil/perfil.component'
+import perfil from './perfil/perfil.component';
+import addSoftware from './software/addSoftware/addSoftware.component';
 //Directives
 import featuresList from '../directives/featuresList/featuresList.directive';
 import activoList from '../directives/activoList/activoList.directive';
-import nixText from '../directives/nix-text/nix-text.directive';
-import nixTextArea from '../directives/nix-text-area/nix-text-area.directive';
-import nixSelect from '../directives/nix-select/nix-select.directive';
-import nixAuto from '../directives/nix-auto/nix-auto.directive';
+import nixText from '../directives/nixText/nixText.directive';
+import nixTextArea from '../directives/nixTextArea/nixTextArea.directive';
+import nixSelect from '../directives/nixSelect/nixSelect.directive';
+import nixAuto from '../directives/nixAuto/nixAuto.directive';
+import activoSelect from '../directives/activoSelect/activoSelect.directive';
+import nixCliente from '../directives/nixCliente/nixCliente.directive';
+import nixTitle from '../directives/nixTitle/nixTitle.directive';
 //STYLESHEETS
 import './app.styl';
-import '../../node_modules/angular-material/angular-material.min.css'
-import '../../node_modules/angular-loading-bar/build/loading-bar.min.css'
+import '../../node_modules/angular-material/angular-material.min.css';
+import '../../node_modules/angular-loading-bar/build/loading-bar.min.css';
 //import '../../node_modules/angular-material-accordion/css/ang-accordion.css'
-import '../../node_modules/angular-material-data-table/dist/md-data-table.min.css'
+import '../../node_modules/angular-material-data-table/dist/md-data-table.min.css';
 
 
 
 angular.module('nixApp', [
-    ngCookies, ngResource, ngSanitize, uiRouter, constants, util, ngMaterial,
-    ngMessages, ngLoading, ngFileUpload, ngMoment,ngPagination,mdDataTable,
-    //==>EXTERNAL MODUELES
-    bifrost, pop, dialog, hummer, select, timer, nxData, imagenix,
-    //==> SERVICES
-    login, menu, master, addUsuario, addCliente, addActivo, addTicket,
-    adminTicket,documTicket,adminCliente,adminUsuario, configActivo,pruebas,
-    entrega,alistarActivo,assignActivo,retiro,hojaVida, adminActivo,bodega,
-    creator,tech,minAdmin,perfil,
-    // ==> COMPONENTS
-    featuresList,activoList,nixText,nixSelect,nixAuto,nixTextArea,
-    // ==> DIRECTIVES
-  ])
+  ngCookies, ngResource, ngSanitize, uiRouter, constants, util, ngMaterial,
+  ngMessages, ngLoading, ngFileUpload, ngMoment, ngPagination, mdDataTable,
+  //==>EXTERNAL MODUELES
+  bifrost, pop, dialog, hummer, select, timer, nxData, imagenix,
+  //==> SERVICES
+  login, menu, master, addUsuario, addCliente, addActivo, addTicket,
+  adminTicket, documTicket, adminCliente, adminUsuario, configActivo, pruebas,
+  entrega, alistarActivo, assignActivo, retiro, hojaVida, adminActivo, bodega,
+  creator, tech, minAdmin, perfil,addSoftware,
+  // ==> COMPONENTS
+  featuresList, activoList, nixText, nixSelect, nixAuto, nixTextArea, activoSelect,
+  nixCliente, nixTitle
+  // ==> DIRECTIVES
+])
   .config(routeConfig)
   .run(runConfig);
 
