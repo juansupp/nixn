@@ -10,9 +10,9 @@ import ngMaterial from 'angular-material';
 import ngMessages from 'angular-messages';
 import ngLoading from 'angular-loading-bar';
 import ngFileUpload from 'ng-file-upload';
-import moment from  'moment';
+import moment from 'moment';
 import momentTimeZone from 'moment-timezone';
-import es from 'moment/locale/es.js'
+import es from 'moment/locale/es.js';
 import ngMoment from 'angular-moment';
 import ngPagination from 'angular-utils-pagination';
 import mdDataTable from 'angular-material-data-table';
@@ -71,6 +71,7 @@ import nixAuto from '../directives/nixAuto/nixAuto.directive';
 import activoSelect from '../directives/activoSelect/activoSelect.directive';
 import nixCliente from '../directives/nixCliente/nixCliente.directive';
 import nixTitle from '../directives/nixTitle/nixTitle.directive';
+import nixTable from '../directives/nixTable/nixTable.directive';
 //STYLESHEETS
 import './app.styl';
 import '../../node_modules/angular-material/angular-material.min.css';
@@ -89,10 +90,10 @@ angular.module('nixApp', [
   login, menu, master, addUsuario, addCliente, addActivo, addTicket,
   adminTicket, documTicket, adminCliente, adminUsuario, configActivo, pruebas,
   entrega, alistarActivo, assignActivo, retiro, hojaVida, adminActivo, bodega,
-  creator, tech, minAdmin, perfil,addSoftware,
+  creator, tech, minAdmin, perfil, addSoftware,
   // ==> COMPONENTS
   featuresList, activoList, nixText, nixSelect, nixAuto, nixTextArea, activoSelect,
-  nixCliente, nixTitle
+  nixCliente, nixTitle, nixTable
   // ==> DIRECTIVES
 ])
   .config(routeConfig)

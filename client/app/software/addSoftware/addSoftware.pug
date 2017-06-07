@@ -1,5 +1,5 @@
 div(layout='row' layout-align='center center')
-  md-content(layout-padding )
+  md-content(layout-padding flex='50')
     md-card-title
         md-card-title-text
           span.md-headline Gestión desoftware
@@ -10,25 +10,32 @@ div(layout='row' layout-align='center center')
       title='Gestión de software'
       text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus consequatur architecto temporibus magnam officia esse magni ut consequuntur eius fugiat id, atque voluptatum quibusdam eaque, incidunt? Voluptates quod necessitatibus eos!')
     md-content(layout='row')
-      form(name='$ctrl.softFrm' ng-submit='$ctrl._addSoftware()' ) 
-        nix-text(
-          ng-model='$ctrl.model._software'
+      md-content(layout='row' flex)
+        nix-table(
           flex
-          required='true'
-          label='Software'
-          name='software'
-          frm='$ctrl.softFrm.software'
-        )
-        nix-text-area(
-          ng-model='$ctrl.model.descripcion'
-          flex
-          required='false'
-          label='Observaciones'
-          name='observaciones'
-          frm='$ctrl.softFrm.observaciones'
-        )
-        md-button(
-          type='submit' 
-        ).md-primary Registrar
-    md-content(layout='row' flex)
-   
+          entity='software'
+          col='$ctrl.tableStruct.col'
+          actions='$ctrl.tableStruct.actions'
+          filter='$ctrl.tableStruct.filter')
+      md-content(layout='row' flex)
+        form(flex name='$ctrl.softFrm' ng-submit='$ctrl.softwareAction($event)' ) 
+          nix-text(
+            ng-model='$ctrl.model._software'
+            flex
+            required='true'
+            label='Software'
+            name='software'
+            frm='$ctrl.softFrm.software'
+          )
+          nix-text-area(
+            ng-model='$ctrl.model.descripcion'
+            flex
+            required='false'
+            label='Observaciones'
+            name='observaciones'
+            frm='$ctrl.softFrm.observaciones'
+          )
+          md-button(
+            type='submit' 
+          ).md-primary Registrar
+      

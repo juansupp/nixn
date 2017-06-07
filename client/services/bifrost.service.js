@@ -13,7 +13,7 @@ export function bifrostService($http, $hummer) {
     delete: _delete
   };
   /*ACTIONS*/
-  function _delete (whereObj) {
+  function _delete(whereObj) {
     let
       where = whereObj ? $hummer.objectToSentence(whereObj) : '1=1',
       dataObject = {
@@ -23,10 +23,10 @@ export function bifrostService($http, $hummer) {
     return $http.post(url + '/delete', dataObject);
   }
 
-  function update (valObj,whereObj){
+  function update(valObj, whereObj) {
     let
       where = whereObj ? $hummer.objectToSentence(whereObj) : '1=1',
-      val = $hummer.objectToSentence(valObj,','),
+      val = $hummer.objectToSentence(valObj, ','),
       dataObject = {
         where: where,
         val: val,
@@ -46,7 +46,7 @@ export function bifrostService($http, $hummer) {
       return $http.post(url + '/find', dataObject);
   }
 
-  function paginate(whereObj,page,numPage,valArray = '*'){
+  function paginate(whereObj, page, numPage, valArray = '*') {
     let
       where = whereObj ? $hummer.objectToSentence(whereObj) : '1=1',
       val = valArray ===  '*' ? valArray : $hummer.arrayToSentence(valArray),
@@ -54,8 +54,8 @@ export function bifrostService($http, $hummer) {
         where: where,
         val: val,
         entity: entity,
-        page : page,
-        numb : numPage
+        page: page,
+        numb: numPage
       };
     return $http.post(url + '/pagination',dataObject)
   }
@@ -72,9 +72,9 @@ export function bifrostService($http, $hummer) {
   function insert(val,custom) {
     //typeof val == 'object' ? custom = true : custom = false;
     //Si es una inserción personalizada
-    if(custom){
+    if(custom) {
       //divide el objeto ingresado en valores y llaves
-      let result  = $hummer.sliceObjectToArrays(val);
+      let result = $hummer.sliceObjectToArrays(val);
       //Construcción de cutom
       custom = `(${result.keys.toString()})`;
       //Construcción de _val
@@ -85,26 +85,19 @@ export function bifrostService($http, $hummer) {
       _val = $hummer.returnQuotes(val);
     return $http.post(url, {
       val: _val,
-      custom : custom,
+      custom: custom,
       entity: entity
     });
   }
   /*PRIVATE FUNCTIONS */
-
-
-
   /*PUBLIC FUNCTIONS */
-  function base (_entity) {
+  function base(_entity) {
     entity = _entity;
     return methods;
   }
 
-  function especificacion (_entity ='especificacion'){
-    entity = _entity;
-    return methods;
-  }
   function usuario(_entity = 'usuario') {
-    entity = _entity
+    entity = _entity;
     return methods;
   }
 
@@ -113,82 +106,77 @@ export function bifrostService($http, $hummer) {
     return methods;
   }
 
-  function activo(_entity='activo') {
-    entity = _entity
-    return methods;
-  }
-
-  function area(_entity ='area') {
+  function activo(_entity = 'activo') {
     entity = _entity;
     return methods;
   }
 
-  function ticket(_entity = 'ticket'){
-    entity = _entity
-    return methods;
-  }
-
-  function documentacion(_entity = 'documentacion'){
+  function area(_entity = 'area') {
     entity = _entity;
     return methods;
   }
 
-  function imagen (_entity='imagen'){
+  function ticket(_entity = 'ticket') {
     entity = _entity;
     return methods;
   }
 
-  function respuesta (_entity = 'respuesta') {
+  function documentacion(_entity = 'documentacion') {
     entity = _entity;
     return methods;
   }
 
-  function pregunta (_entity='pregunta'){
-    entity =_entity;
-    return methods;
-  }
-  function encuesta (_entity='encuesta') {
-    entity = _entity;
-    return methods;
-  }
-  function tipoActivo(_entity='tipo_activo'){
-    entity = _entity;
-    return methods;
-  }
-  function car(_entity='caracteristica'){
-    entity = _entity;
-    return methods;
-  }
-  function carValor(_entity='caracteristica_valor'){
-    entity = _entity;
-    return methods;
-  }
-  function carActivo(_entity='caracteristica_activo'){
-    entity =_entity;
-    return methods;
-  }
-
-  function modelo(_entity='modelo') {
-    entity = _entity
-    return methods;
-  }
-
-  function marca(_entity='marca'){
-    entity =_entity;
-    return methods;
-  }
-
-  function servicio(_entity = 'servicio'){
+  function imagen(_entity = 'imagen') {
     entity = _entity;
     return methods;
   }
 
-  function software(_entity='software'){
+  function respuesta(_entity = 'respuesta') {
     entity = _entity;
     return methods;
   }
 
+  function pregunta(_entity = 'pregunta') {
+    entity = _entity;
+    return methods;
+  }
+  function encuesta(_entity = 'encuesta') {
+    entity = _entity;
+    return methods;
+  }
+  function tipoActivo(_entity = 'tipo_activo') {
+    entity = _entity;
+    return methods;
+  }
+  function car(_entity = 'caracteristica') {
+    entity = _entity;
+    return methods;
+  }
+  function carValor(_entity = 'caracteristica_valor') {
+    entity = _entity;
+    return methods;
+  }
   function carActivo(_entity = 'caracteristica_activo') {
+    entity = _entity;
+    return methods;
+  }
+
+  function modelo(_entity = 'modelo') {
+    entity = _entity;
+    return methods;
+  }
+
+  function marca(_entity = 'marca') {
+    entity = _entity;
+    return methods;
+  }
+
+  function servicio(_entity = 'servicio') {
+    entity = _entity;
+    return methods;
+  }
+
+  function software(_entity = 'software') {
     entity = _entity;
     return methods;
   }
@@ -203,17 +191,17 @@ export function bifrostService($http, $hummer) {
     return methods;
   }
 
-  function contacto(_entity='contacto'){
+  function contacto(_entity = 'contacto') {
     entity = _entity;
     return methods;
   }
 
-  function entrega(_entity='entrega'){
+  function entrega(_entity = 'entrega') {
     entity = _entity;
     return methods;
   }
 
-  function hojaVida(_entity='hoja_vida'){
+  function hojaVida(_entity = 'hoja_vida') {
     entity = _entity;
     return methods;
   }
@@ -245,6 +233,7 @@ export function bifrostService($http, $hummer) {
   this.servicio = servicio;
 }
 
-export default angular.module('nixApp.bifrost', [])
+export default angular
+  .module('nixApp.bifrost', [])
   .service('$bi', bifrostService)
   .name;

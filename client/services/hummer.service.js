@@ -80,20 +80,23 @@ export function hummerService() {
   function evaluateRepetition(list, value, key) {
     let repeat = false;
     list.forEach(item => {
-      if (item[key] === value)
-        repeat = true
+      if(item[key] === value) repeat = true;
     });
     return repeat;
   }
 
-
+  function normalizeColumna(listObj) {
+    let row = {};
+    listObj.forEach(item => row[item.key] = item.value);
+    return row;
+  }
 
   function sliceObjectToArrays(theObject) {
     let
       arrVal = new Array(), // => Variable que toma todos las valores
       arrPreVal = new Array(); // => Variable que toma la personalizacion
     //Loop que recorre el objecto para poder dividir el objeto en dos arrays
-    for (let key in theObject) {
+    for(let key in theObject) {
       arrPreVal.push(key);
       arrVal.push(theObject[key]);
     }
@@ -101,6 +104,7 @@ export function hummerService() {
     return { keys : arrPreVal, values  : arrVal};
   }
   //
+  this.normalizeColumna =  normalizeColumna;
   this.sliceObjectToArrays = sliceObjectToArrays;
   this.evaluateRepetition = evaluateRepetition;
   this.castFormToModel = castFormToModel;

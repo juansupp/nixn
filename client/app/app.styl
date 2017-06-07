@@ -1,5 +1,5 @@
-$fa-font-path = '../assets/fonts/font-awesome/'
-@import '~font-awesome-stylus/stylus/index'
+//$fa-font-path = '../assets/fonts/font-awesome/'
+//@import '~font-awesome-stylus/stylus/index'
 $primary-color = #4a4a4a;
 $primary-color-dark =rgb(0, 165, 186);
 $font-color = black
@@ -58,6 +58,7 @@ button, html, input, select, textarea
 
 // Component styles are injected through gulp
 /* inject:styl */
+@import '../directives/nixTable/nixTable'
 @import 'activo/addActivo/addActivo';
 @import 'activo/alistarActivo/alistarActivo';
 @import 'activo/entrega/entrega';

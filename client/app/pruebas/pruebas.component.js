@@ -12,39 +12,67 @@ export class PruebasComponent {
     this.some = '';
     this.sme = '';
     this.$bi = $bi;
-    this.nxData =  $nxData;
+    this.nxData = $nxData;
   }
 
-  change(){
-
-    
-    /*this.nxData.modelo.w = {
-      fk_id_marca  : this.marca
-    };*/
-
-  }
-
-  submit (frm) {
-
-    let ins = [
-      'GOnzalez',
-      'jjuan',
-      '319705244',
-      'eas@asd.com',
-      '123',
-      '1'
-    ]
-
-    this.$bi.usuario().insert(ins).then(response => console.log(response))
-  }
   $onInit() {
+    /* 
+    */
+
+
+    //function normalizeColumna(listObj) {
+    let listObj = [{
+      key: 'id_software',
+      value: 16
+    }, {
+      key: '_software',
+      value: 16
+    }];
+    let row = {};
+    listObj.forEach(item => row[item.key] = item.value);
+    console.log(row)
+    //}
+
+    /*
+    */
+
+    this.col = [{
+      name: '_contacto',
+      title: 'Contacto',
+    }, {
+      name: 'correo',
+      title: 'Correo'
+    }];
+    //
+    let play = (ev, activo) => console.log(ev, activo);
+    //
+    this.actions = [{
+      play: play,
+      icon: 'history',
+      toolTip: 'Ver historial de sucesos'
+    }, {
+      play: play,
+      icon: 'face',
+      toolTip: 'Ver historial de sucesos'
+    }];
+    //
+    this.filter = {
+      id_contacto: "1" 
+    };
+    //
     this.model = new Object();
     this.pru = new Object();
 
     this.nxFrm = {
       cliente: this.pru.cliente,
       area: this.pru.area
-    }
+    };
+
+    this.items = {
+      uno: 'uno',
+      dos: 'dos',
+      tres: 'tres'
+    };
 
   }
 }

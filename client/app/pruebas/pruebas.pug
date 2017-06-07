@@ -1,4 +1,12 @@
-form( name='$ctrl.pru' ng-submit='$ctrl.submit($ctrl.pru)')
+div(layout='row')
+	nix-table(
+		flex
+		entity='full_contacto'
+		col='$ctrl.col'
+		actions='$ctrl.actions'
+		filter='$ctrl.filter')
+
+//-form( name='$ctrl.pru' ng-submit='$ctrl.submit($event,$ctrl.pru)')
 	nix-auto(
 		required='true'
 		name='marca'
@@ -17,9 +25,16 @@ form( name='$ctrl.pru' ng-submit='$ctrl.submit($ctrl.pru)')
 		nx-data='$ctrl.nxData.modelo'
 		frm="$ctrl.pru.modelo"
 	)
+
 	nix-cliente(
 		ng-model='$ctrl.cliente'
 		nx-frm='$ctrl.pru.cliente'
 		full='true'
 	)
+	div(layout='row')
+		nix-table(
+			flex
+			layout-padding
+			col='$ctrl.col'
+			entity='full_contacto')
 	md-button( type='submit') Fin

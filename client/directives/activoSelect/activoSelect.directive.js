@@ -7,7 +7,7 @@ function activoSelect($nxData, $bi) {
   function link(scope, element, attrs) {
 
     //Funciones privadas
-    function init(){
+    function init() {
       scope.nxData = $nxData;
       scope.current = 1;
       scope.buscar = '';
@@ -15,7 +15,7 @@ function activoSelect($nxData, $bi) {
       console.log(scope.actionStruct);
     }
 
-    function currentTotal () {
+    function currentTotal() {
       //Hace consulta de la cantidad de activos que hay por filtro
       $bi.base(scope.entity)
         .find([`count(id_${scope.entity}) total`], scope.filters)
@@ -40,9 +40,9 @@ function activoSelect($nxData, $bi) {
         scope.filters = filter;
         scope.allActivos(scope.current);
       }
-    }
+    };
     //
-    scope.allActivos = (page) => {
+    scope.allActivos = page => {
       //Total activos para paginar
       currentTotal(scope.filters);
       //Hace una busqueda paginada de entidad libre bifrost.base con filtros dispuestos
