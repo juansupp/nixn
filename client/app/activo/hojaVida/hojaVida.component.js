@@ -16,6 +16,8 @@ export class hojaVidaComponent {
   } 
 
   seeSucesos(activo) {
+    //Se hace reset a lista de historiales
+    this.historial = [];
     //se globaliza el activo
     //this.activo = activo;
     this.$bi

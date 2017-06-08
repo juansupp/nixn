@@ -46,10 +46,9 @@ export class AddTicketComponent {
         return response.data.length > 0 ? response.data[0].N_Ticket + 1: '0001'
       });
   }
-
-
-
+  //
   insertTicket(nTicket,fkServicio){
+    console.log(this.model.contacto);
     let
       //Se acorta la variable
       idCreador = (this.$cookieStore.get('user')).id_usuario,
@@ -64,7 +63,7 @@ export class AddTicketComponent {
         fk_id_contacto: this.model.contacto
       };
 
-    return this.$bi.ticket().insert(objTicket,true)
+    return this.$bi.ticket().insert(objTicket, true)
       .then(response => {
         return response.data[0].id_ticket;
       });
@@ -73,7 +72,7 @@ export class AddTicketComponent {
   getServicio(){
     if(!this.model.servicio)
      return this.$bi.servicio().insert([this.text.servicio])
-       .then(response => {  return response.data[0].id_servicio});
+       .then(response => {  return response.data[0].id_servicio; });
      else{
        let deferred = this.$q.defer();
        deferred.resolve( this.model.servicio.value )
@@ -105,7 +104,7 @@ export class AddTicketComponent {
         })
   }
   //HALF_POST = no es obligatoria su inserción
-  insertImagen(fkDocumentacion){
+  insertImagen(fkDocumentacion) {
     if(this.model.images)
       return this.$imagenix
         .save(this.model.images, fkDocumentacion);
@@ -114,12 +113,11 @@ export class AddTicketComponent {
       deferred.resolve(0)
       return deferred.promise;
     }
-
   }
 
-  end(){
+  end() {
     this.$pop.show('Ticket Registrado satisfactoriamente')
-    this.model = new Object();
+    this.model = {};
     this.btnDisabled = false;
   }
 
@@ -145,17 +143,15 @@ export class AddTicketComponent {
         })
       })
     }
-
-
-
-
   }
 
   $onInit() {
     //Se activa el botón de submit por defecto
     this.btnDisabled = false;
     //Objeto de activo sleccionado
-    this.activoSeleccionado = new Object();
+    this.activoSeleccionado = {};
+    //
+    this.model = {};
   }
 }
 

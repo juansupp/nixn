@@ -1,10 +1,11 @@
 
 Modulo ticket
 
-✔ Directiva de titulo @done (31/5/2017 15:31:11)
-☐ Agregar directiva nixTable
-☐ Agregar software
-☐ arreglar filtro activo select directive
+✔ Directiva de titulo @done (8/6/2017 7:57:57)
+✔ Agregar directiva nixTable @done (8/6/2017 7:57:50)
+✔ Agregar software @done (8/6/2017 10:39:32)
+✔ arreglar filtro activo select directive @done (8/6/2017 13:34:50)
+☐ Cambiar formulario de newTicket @critical 
 ☐ Administrar licencias
 ☐ Modificar alistar activo (agregar contacto a la inserción)
 ☐ Gestión de encuestas

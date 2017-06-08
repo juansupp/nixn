@@ -6,8 +6,10 @@ md-card
     div(layout='column')
       nix-cliente(
         layout-padding
-        full='false',
-        ng-model='model.area'
+        full='true',
+        model-cliente='cliente'
+        model-area='area'
+        model-contacto='contacto'
       )
     md-list-item.secondary-button-padding.md-3-line(
       dir-paginate='activo in activos | itemsPerPage: 10'

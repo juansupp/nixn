@@ -3,9 +3,8 @@ const angular = require('angular');
 const _ = require('lodash');
 
 function activoSelect($nxData, $bi) {
-
+  //
   function link(scope, element, attrs) {
-
     //Funciones privadas
     function init() {
       scope.nxData = $nxData;
@@ -14,15 +13,18 @@ function activoSelect($nxData, $bi) {
       scope.allActivos(scope.current);
       console.log(scope.actionStruct);
     }
-
+    //
     function currentTotal() {
       //Hace consulta de la cantidad de activos que hay por filtro
       $bi.base(scope.entity)
         .find([`count(id_${scope.entity}) total`], scope.filters)
         .then(response => scope.totalActivos = response.data[0].total);
     }
-
     //Funciones publicas
+    scope.change = () => {
+      console.log('h');
+    };
+    //
     scope.buscarActivos = () => {
       //Valor para filtrar
       let value = `'%${scope.buscar}%'`;
@@ -54,11 +56,31 @@ function activoSelect($nxData, $bi) {
     scope.$watch('filters', data => {
       // => en caso que no sea vacio
       if(data) scope.allActivos(scope.current);
-    },() => {});
+    }, () => {});
+    //
+    scope.$watch('cliente', data => {
+      if(data) {
+        scope.filters = { fk_id_cliente: data};
+        scope.allActivos(scope.current);
+      }
+    });
+    //
+    scope.$watch('area', data => {
+      if(data) {
+        scope.filters = { fk_id_area: data};
+        scope.allActivos(scope.current);
+      }
+    });
+    //
+    scope.$watch('contacto', data => {
+      if(data) {
+        scope.filters = { fk_id_contacto: data};
+        scope.allActivos(scope.current);
+      }
+    });
     //
     init();
   }
-
 
   return {
     template: require('./activoSelect.pug'),

@@ -5,22 +5,15 @@ div(layout='row', layout-align='center center')
         span.md-headline Nuevo ticket
         p.md-body-1
           | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ducimus quas alias iusto, voluptas esse, aspernatur nobis reprehenderit! Provident, error eaque veniam maxime optio in dolorem sequi quaerat voluptate quae.
-    form(name='$ctrl.ticketForm', ng-submit='$ctrl.nuevoTicket($event,ticketForm)')
+    form(name='$ctrl.ticketForm', ng-submit='$ctrl.nuevoTicket($event,$ctrl.ticketForm)')
       div(layout='row' flex)
         //-Cliente
-        nix-select(
+        nix-cliente(
           flex
-          label='Cliente'
-          ng-change='$ctrl.loadAreas()'
-          ng-model='model.cliente'
-          nx-data='nxData.cliente')
-        //-Area
-        nix-select(
-          flex
-          label='Area'
-          wait-for-where='true'
-          ng-model='model.area'
-          nx-data='nxData.area')
+          nxFrm='$ctrl.ticketForm.cliente'
+          full='true'
+          model-contacto='$ctrl.model.contacto'
+        )
       div(layout='row' flex)
         //-Servicio
         nix-auto(

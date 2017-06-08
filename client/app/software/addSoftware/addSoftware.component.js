@@ -22,6 +22,7 @@ export class AddSoftware {
     let accion = !this.aciton ? 'Registrado' : 'Actualizado';
     this.$pop.show(`Software ${accion} satisfactoriamente`);
   }
+  //
   confirm(ev) {
     let title = 'Confirmación';
     let text = '¿Seguro que desea registrar el software?';
@@ -37,14 +38,14 @@ export class AddSoftware {
     });
   }
   //
-  _updateSoftware() {
-    
-    console.log(this.model);
-    /*this.$bi
+  _updateSoftware(ev) {
+    this.confirm(ev).then(() => {
+      this.$bi
       .software()
       .update(this.model)
-      .then(() => this.$pop.show('Software agregado satisfactoriamente'));
-    this.action = 0;*/
+      .then(() => this.end());
+      this.action = 0;
+    });
   }
   //Pasa el elemento seleccionado de la tabla al formulario
   _editSoftware(software) {
@@ -83,9 +84,7 @@ export class AddSoftware {
     //Por defecto la accion es 0 = agregar
     this.action = 0;
   }
-
 }
-
 export default angular
   .module('nixApp.addSoftware', [uiRouter])
   .config(route)

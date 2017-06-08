@@ -4,32 +4,46 @@ const angular = require('angular');
 const _ = require('lodash');
 
 function nixCliente($nxData) {
-
-	function link(scope) {
-
-		function loadAreas() {
+	//
+  function link(scope) {
+		//
+    function loadAreas() {
+			console.log('LoadAreas');
       _.defer(() => {
-        scope.nxData.area.w = { 
-          fk_id_cliente: scope.model.cliente
-        };
+        if(scope.modelCliente) scope.modelCliente = scope.model.cliente;
+        scope.nxData.area.w = {fk_id_cliente: scope.model.cliente};
       });
     }
-
-		function loadContactos() {
-			if(scope.full) {
-				console.log(scope.full);
-				_.defer(() => {
+		//
+    function loadContactos() {
+			console.log('LoadContacto');
+			_.defer(() => {
+				if(scope.full) {
 					scope.nxData.contacto.w = { 
 						fk_id_area: scope.model.area
 					};
-				});
-			}
+				}
+				//
+				if(scope.modelArea) scope.modelArea = scope.model.area;
+			});
 		}
-
+		//
+		function selectContacto() {
+			_.defer(() => {
+				console.log(scope.modelContacto)
+				if(scope.modelContacto) {
+					
+					scope.modelContacto = scope.model.contacto; 
+				}
+			});
+		}
+		//
+		scope.selectContacto = selectContacto;
 		scope.nxData = $nxData;
 		scope.loadAreas = loadAreas;
 		scope.loadContactos = loadContactos;
 	}
+
 
 
 	return {
@@ -37,9 +51,11 @@ function nixCliente($nxData) {
 		template: require('./nixCliente.pug'),
 		link: link,
 		scope: {
-			ngModel: '=',
 			nxFrm: '=',
-			full: '@'
+			full: '@',
+			modelCliente: '=',
+			modelArea: '=',
+			modelContacto: '='
 		}
 	};
 }
