@@ -19,12 +19,9 @@ export class AdminTicketComponent {
     this.nxData = $nxData;
     //this.moment = moment;
   }
-
-
-
+  //
   allTickets(filter,page) {
-    if (filter)
-      filter["tipo"] = 'II';
+    if (filter) filter["tipo"] = 'II';
     if(this.$cookieStore.get('user').id_rol == 3)
       filter['tecnico']   = this.$cookieStore.get('user').id_usuario
     
@@ -44,28 +41,27 @@ export class AdminTicketComponent {
       //count the files
     });
   }
-
+  //
   filterDates(second) {
     //reset page ?
-    let fecha = new Array();
-    if (!second) {
-      fecha[0] = this.$time.date(this.fecha[0]) //this.moment(this.fecha[0]).format(sqlFormat);
+    let fecha = [];
+    if(!second) {
+      fecha[0] = this.$time.date(this.fecha[0]);//this.moment(this.fecha[0]).format(sqlFormat);
       fecha[1] = fecha[0];
     } else {
       fecha[0] = this.$time.date(this.fecha[0]);
       fecha[1] = this.$time.date(this.fecha[1]);
     }
     this.model.fecha = `'${fecha[0]}' and '${fecha[1]}'`;
-    this.allTickets(this.model,1);
+    this.allTickets(this.model, 1);
   }
-
+  //
   currenTotal (filter) {
     this.$bi.ticket('full_ticket')
       .find(['count(id_ticket) total'],filter)
       .then(response => this.totalTickets = response.data[0].total);
   }
-
-
+  //
   $onInit() {
     this.logg = this.$cookieStore.get('user');
     //
@@ -83,13 +79,16 @@ export class AdminTicketComponent {
     //CLIENTES
     this.$bi.cliente('full_cliente').all()
       .then(response => this.clientes = response.data);
-
     //Estados
     this.estados = [
       {
         value: 'N',
         display: 'Abierto',
         icon: 'error_outline'
+      },{
+        value: 'F',
+        display: 'Sin asignar activo',
+        icon: 'phonelink_off'
       }, {
         value: 'P',
         display: 'En proceso',
@@ -104,8 +103,6 @@ export class AdminTicketComponent {
         icon: 'remove_circle_outline'
       }
     ];
-
-
   }
 }
 

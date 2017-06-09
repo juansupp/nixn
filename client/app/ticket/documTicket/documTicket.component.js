@@ -25,9 +25,6 @@ export class DocumTicketCmponent {
     this.$pop.show("Documentacion registrada satisfactoriamente");
     this.$state.go('m.adminTicket');
   }
-  openFeatures(feature) {
-    this.features[feature].visible = !this.features[feature].visible;
-  }
   /*
    *   Proceso global de documentar
    *   @tipo = tipo de documentacion OO,SS,CC,EE

@@ -49,7 +49,7 @@ export function bifrostService($http, $hummer) {
   function paginate(whereObj, page, numPage, valArray = '*') {
     let
       where = whereObj ? $hummer.objectToSentence(whereObj) : '1=1',
-      val = valArray ===  '*' ? valArray : $hummer.arrayToSentence(valArray),
+      val = valArray === '*' ? valArray : $hummer.arrayToSentence(valArray),
       dataObject = {
         where: where,
         val: val,
@@ -57,7 +57,7 @@ export function bifrostService($http, $hummer) {
         page: page,
         numb: numPage
       };
-    return $http.post(url + '/pagination',dataObject)
+    return $http.post(url + '/pagination', dataObject);
   }
 
   function all(whereArray) {

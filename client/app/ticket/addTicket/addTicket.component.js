@@ -25,13 +25,21 @@ export class AddTicketComponent {
   }
 
 
-  policeActivo(){
+  policeActivo(frm){
+    //En caso que el formulario sea invalido
+    if(frm.$valid) return true;
+    else {
+      this.$pop.show('Veriifica que el formulario esté completo');
+      return false;
+    }
+    //Hubo imagenes?
     if(this.model.images) {
+      //mire el largo de la imagen (existe?)
       if (this.model.images.length <= 0){
-        this.$pop.show("El tamaño de las imagenes supera al permitido {MAX: 1MB per image} "); //??de lo contrario se insertan las imagenes
+        this.$pop.show('El tamaño de las imagenes supera al permitido {MAX: 1MB per image} '); //??de lo contrario se insertan las imagenes
         return false;
       } else {
-        return true
+        return true;
       }
     } else {
       return true;
@@ -122,7 +130,7 @@ export class AddTicketComponent {
   }
 
   nuevoTicket(ev,frm) {
-    if(this.policeActivo()){
+    if(this.policeActivo(frm)){
       this.btnDisabled = true;
       this.getLastTicket().then(lastTicket => {
         //

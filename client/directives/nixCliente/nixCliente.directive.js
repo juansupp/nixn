@@ -6,17 +6,16 @@ const _ = require('lodash');
 function nixCliente($nxData) {
 	//
   function link(scope) {
+		init();
 		//
     function loadAreas() {
-			console.log('LoadAreas');
       _.defer(() => {
-        if(scope.modelCliente) scope.modelCliente = scope.model.cliente;
+				scope.modelCliente = scope.model.cliente;
         scope.nxData.area.w = {fk_id_cliente: scope.model.cliente};
       });
     }
 		//
     function loadContactos() {
-			console.log('LoadContacto');
 			_.defer(() => {
 				if(scope.full) {
 					scope.nxData.contacto.w = { 
@@ -24,18 +23,18 @@ function nixCliente($nxData) {
 					};
 				}
 				//
-				if(scope.modelArea) scope.modelArea = scope.model.area;
+				scope.modelArea = scope.model.area;
 			});
 		}
 		//
 		function selectContacto() {
-			_.defer(() => {
-				console.log(scope.modelContacto)
-				if(scope.modelContacto) {
-					
-					scope.modelContacto = scope.model.contacto; 
-				}
-			});
+			_.defer(() => scope.modelContacto = scope.model.contacto);
+		}
+		//
+		function init() {
+			scope.modelCliente = '';
+			scope.modelArea = '';
+			scope.modelContacto = '';
 		}
 		//
 		scope.selectContacto = selectContacto;
@@ -43,9 +42,7 @@ function nixCliente($nxData) {
 		scope.loadAreas = loadAreas;
 		scope.loadContactos = loadContactos;
 	}
-
-
-
+	//
 	return {
 		restrict: 'EA',
 		template: require('./nixCliente.pug'),
@@ -53,9 +50,9 @@ function nixCliente($nxData) {
 		scope: {
 			nxFrm: '=',
 			full: '@',
-			modelCliente: '=',
-			modelArea: '=',
-			modelContacto: '='
+			modelCliente: '=?',
+			modelArea: '=?',
+			modelContacto: '=?'
 		}
 	};
 }
